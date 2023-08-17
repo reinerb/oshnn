@@ -1,3 +1,12 @@
+import Head from "next/head";
+
 export default function Home() {
-  return <h1>Hello world!</h1>;
+  return (
+    <>
+      <Head>
+        <title>OSHNN | Ocean State Health News Net</title>
+      </Head>
+      <h1>Hello world!</h1>
+    </>
+  );
 }
