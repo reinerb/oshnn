@@ -9,7 +9,8 @@ interface Props {
 
 function ColorModeSwitcher(props: Props) {
   const { className } = props;
-  const { theme, setTheme } = useTheme();
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const toggleTheme = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
@@ -18,7 +19,7 @@ function ColorModeSwitcher(props: Props) {
   return (
     <FontAwesomeIcon
       icon={theme === "dark" ? faMoon : faSun}
-      className={`${className}`}
+      className={`cursor-pointer text-xl text-slate-950 hover:text-slate-800 dark:text-slate-50 dark:hover:text-slate-200 ${className}`}
       onClick={toggleTheme}
     />
   );

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 
 export default function Home() {
   return (
@@ -6,7 +7,9 @@ export default function Home() {
       <Head>
         <title>OSHNN | Ocean State Health News Net</title>
       </Head>
-      <h1>Hello world!</h1>
+      <PrimaryLayout>
+        <h1>Home</h1>
+      </PrimaryLayout>
     </>
   );
 }
