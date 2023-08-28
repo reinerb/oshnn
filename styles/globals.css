@@ -4,6 +4,12 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 dark:bg-slate-950;
+    @apply bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-slate-50;
+  }
+}
+
+@layer components {
+  header a {
+    @apply transition-colors duration-300 hover:text-slate-800 dark:hover:text-slate-200;
   }
 }
