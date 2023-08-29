@@ -15,17 +15,14 @@ export type PageQueryData = BaseQueryData & {
 export type PostQueryData = BaseQueryData & {
   acf: ACFData | [];
   postDate: string;
-  content: {
-    protected: boolean;
-    content: string;
-  };
+  content: string;
   categories: number[];
 };
 
 type ACFData = {
   articleUrl: string;
   articleAuthors: string;
-  articleDate: string;
+  publicationDate: string;
   publicationTitle: string;
   paywall: boolean;
 };
@@ -34,3 +31,18 @@ export type WordPressQueryData =
   | PostQueryData
   | PageQueryData
   | CategoryQueryData;
+
+export type RawPostQueryData = {
+  acf: ACFData | [];
+  categories: number[];
+  content: {
+    rendered: string;
+    protected: boolean;
+  };
+  date: string;
+  id: number;
+  slug: string;
+  title: {
+    rendered: string;
+  };
+};
