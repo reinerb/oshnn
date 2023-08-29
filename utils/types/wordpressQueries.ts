@@ -58,3 +58,10 @@ export type RawPageQueryData = {
     rendered: string;
   };
 };
+
+export type RawCategoryQueryData = {
+  id: number;
+  name: string;
+  parent: number;
+  slug: string;
+};

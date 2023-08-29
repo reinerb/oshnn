@@ -1,7 +1,9 @@
 import { Override } from "@/utils/types/generics";
 import {
+  CategoryQueryData,
   PageQueryData,
   PostQueryData,
+  RawCategoryQueryData,
   RawPageQueryData,
   RawPostQueryData,
   WordPressQueryData,
@@ -37,7 +39,7 @@ async function postHandler(): Promise<PostQueryData[]> {
 }
 
 async function pageHandler(): Promise<PageQueryData[]> {
-  const url = `${wordpressUrl}/pages$_fields=content,id,title,slug`;
+  const url = `${wordpressUrl}/pages?_fields=content,id,title,slug`;
 
   const response: RawPageQueryData[] = await fetch(url, { method: "GET" }).then(
     (res) => res.json(),
@@ -52,6 +54,29 @@ async function pageHandler(): Promise<PageQueryData[]> {
     };
   });
 }
+
+async function categoryHandler(): Promise<CategoryQueryData[]> {
+  const url = `${wordpressUrl}/categories?_fields=id,name,parent,slug`;
+
+  const response: RawCategoryQueryData[] = await fetch(url, {
+    method: "GET",
+  }).then((res) => res.json());
+
+  return response.map((category) => {
+    return {
+      id: category.id,
+      title: category.name,
+      slug: category.slug,
+      parentId: category.parent,
+    };
+  });
+}
+
+const queryHandler = {
+  posts: postHandler,
+  pages: pageHandler,
+  categories: categoryHandler,
+};
 
 export default function handler(
   req: PostsRequest,
