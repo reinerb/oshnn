@@ -16,10 +16,10 @@ interface WordPressQuery {
   type: "posts" | "pages" | "categories";
 }
 
-const wordpressUrl = "https://oshnn.btreiner.com/wp-json/wp/v2";
-
+// Retrieves data for all posts
+// If more than one page, requests all API pages and puts them into one array
 async function postHandler(): Promise<PostQueryData[]> {
-  const url = `${wordpressUrl}/posts?_fields=acf,date,id,slug,title,content?per_page=100`;
+  const url = `${process.env.WORDPRESS_URL}/posts?_fields=acf,date,id,slug,title,content?per_page=100`;
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -47,8 +47,10 @@ async function postHandler(): Promise<PostQueryData[]> {
   });
 }
 
+// Retrieves data for all pages
+// If more than one page, requests all API pages and puts them into one array
 async function pageHandler(): Promise<PageQueryData[]> {
-  const url = `${wordpressUrl}/pages?_fields=content,id,title,slug`;
+  const url = `${process.env.WORDPRESS_URL}/pages?_fields=content,id,title,slug`;
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -73,8 +75,10 @@ async function pageHandler(): Promise<PageQueryData[]> {
   });
 }
 
+// Retrieves data for all pages
+// If more than one page, requests all API pages and puts them into one array
 async function categoryHandler(): Promise<CategoryQueryData[]> {
-  const url = `${wordpressUrl}/categories?_fields=id,name,parent,slug`;
+  const url = `${process.env.WORDPRESS_URL}/categories?_fields=id,name,parent,slug`;
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -102,6 +106,7 @@ async function categoryHandler(): Promise<CategoryQueryData[]> {
   });
 }
 
+// Switch statement for which handler to use
 const queryHandler = {
   posts: postHandler,
   pages: pageHandler,
