@@ -16,6 +16,10 @@ interface WordPressQuery {
   type: "posts" | "pages" | "categories";
 }
 
+interface ErrorMessage {
+  message: string;
+}
+
 // Retrieves data for all posts
 // If more than one page, requests all API pages and puts them into one array
 async function postHandler(): Promise<PostQueryData[]> {
@@ -113,9 +117,22 @@ const queryHandler = {
   categories: categoryHandler,
 };
 
-export default function handler(
+export default async function handler(
   req: PostsRequest,
-  res: NextApiResponse<WordPressQueryData[]>,
+  res: NextApiResponse<WordPressQueryData[] | ErrorMessage>,
 ) {
-  res.status(200);
+  if (req.method !== "GET") {
+    res.status(501).json({ message: "Only GET requests are supported." });
+  }
+
+  try {
+    const response = await queryHandler[req.body.type]();
+    res.status(200).json(response);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "An unknown problem occurred." });
+    }
+  }
 }
