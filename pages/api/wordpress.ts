@@ -2,6 +2,7 @@ import { Override } from "@/utils/types/generics";
 import {
   PageQueryData,
   PostQueryData,
+  RawPageQueryData,
   RawPostQueryData,
   WordPressQueryData,
 } from "@/utils/types/wordpressQueries";
@@ -31,6 +32,23 @@ async function postHandler(): Promise<PostQueryData[]> {
       postDate: post.date,
       content: post.content.rendered,
       categories: post.categories,
+    };
+  });
+}
+
+async function pageHandler(): Promise<PageQueryData[]> {
+  const url = `${wordpressUrl}/pages$_fields=content,id,title,slug`;
+
+  const response: RawPageQueryData[] = await fetch(url, { method: "GET" }).then(
+    (res) => res.json(),
+  );
+
+  return response.map((page) => {
+    return {
+      id: page.id,
+      title: page.title.rendered,
+      slug: page.slug,
+      content: page.content.rendered,
     };
   });
 }

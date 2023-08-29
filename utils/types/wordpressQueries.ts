@@ -46,3 +46,15 @@ export type RawPostQueryData = {
     rendered: string;
   };
 };
+
+export type RawPageQueryData = {
+  content: {
+    rendered: string;
+    protected: boolean;
+  };
+  id: number;
+  slug: string;
+  title: {
+    rendered: string;
+  };
+};
