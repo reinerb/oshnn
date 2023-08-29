@@ -19,13 +19,22 @@ interface WordPressQuery {
 const wordpressUrl = "https://oshnn.btreiner.com/wp-json/wp/v2";
 
 async function postHandler(): Promise<PostQueryData[]> {
-  const url = `${wordpressUrl}/posts?_fields=acf,date,id,slug,title,content`;
+  const url = `${wordpressUrl}/posts?_fields=acf,date,id,slug,title,content?per_page=100`;
 
-  const response: RawPostQueryData[] = await fetch(url, { method: "GET" }).then(
-    (res) => res.json(),
-  );
+  const response = await fetch(url, { method: "GET" });
+  const pagination = await Number(response.headers.get("X-WP-TotalPages"));
+  let queryData: RawPostQueryData[] = await response.json();
 
-  return response.map((post) => {
+  if (pagination > 1) {
+    for (let i = 2; i <= pagination; i++) {
+      let newResponse: RawPostQueryData[] = await fetch(`${url}?page=${i}`, {
+        method: "GET",
+      }).then((res) => res.json());
+      queryData = [...queryData, ...newResponse];
+    }
+  }
+
+  return queryData.map((post) => {
     return {
       id: post.id,
       title: post.title.rendered,
@@ -41,11 +50,20 @@ async function postHandler(): Promise<PostQueryData[]> {
 async function pageHandler(): Promise<PageQueryData[]> {
   const url = `${wordpressUrl}/pages?_fields=content,id,title,slug`;
 
-  const response: RawPageQueryData[] = await fetch(url, { method: "GET" }).then(
-    (res) => res.json(),
-  );
+  const response = await fetch(url, { method: "GET" });
+  const pagination = await Number(response.headers.get("X-WP-TotalPages"));
+  let queryData: RawPageQueryData[] = await response.json();
 
-  return response.map((page) => {
+  if (pagination > 1) {
+    for (let i = 2; i <= pagination; i++) {
+      let newResponse: RawPageQueryData[] = await fetch(`${url}?page=${i}`, {
+        method: "GET",
+      }).then((res) => res.json());
+      queryData = [...queryData, ...newResponse];
+    }
+  }
+
+  return queryData.map((page) => {
     return {
       id: page.id,
       title: page.title.rendered,
@@ -58,11 +76,23 @@ async function pageHandler(): Promise<PageQueryData[]> {
 async function categoryHandler(): Promise<CategoryQueryData[]> {
   const url = `${wordpressUrl}/categories?_fields=id,name,parent,slug`;
 
-  const response: RawCategoryQueryData[] = await fetch(url, {
-    method: "GET",
-  }).then((res) => res.json());
+  const response = await fetch(url, { method: "GET" });
+  const pagination = await Number(response.headers.get("X-WP-TotalPages"));
+  let queryData: RawCategoryQueryData[] = await response.json();
 
-  return response.map((category) => {
+  if (pagination > 1) {
+    for (let i = 2; i <= pagination; i++) {
+      let newResponse: RawCategoryQueryData[] = await fetch(
+        `${url}?page=${i}`,
+        {
+          method: "GET",
+        },
+      ).then((res) => res.json());
+      queryData = [...queryData, ...newResponse];
+    }
+  }
+
+  return queryData.map((category) => {
     return {
       id: category.id,
       title: category.name,
