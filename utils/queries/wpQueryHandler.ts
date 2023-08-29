@@ -1,4 +1,3 @@
-import { Override } from "@/utils/types/generics";
 import {
   CategoryQueryData,
   PageQueryData,
@@ -6,24 +5,12 @@ import {
   RawCategoryQueryData,
   RawPageQueryData,
   RawPostQueryData,
-  WordPressQueryData,
 } from "@/utils/types/wordpressQueries";
-import type { NextApiRequest, NextApiResponse } from "next";
-
-type PostsRequest = Override<NextApiRequest, { body: WordPressQuery }>;
-
-interface WordPressQuery {
-  type: "posts" | "pages" | "categories";
-}
-
-interface ErrorMessage {
-  message: string;
-}
 
 // Retrieves data for all posts
 // If more than one page, requests all API pages and puts them into one array
 async function postHandler(): Promise<PostQueryData[]> {
-  const url = `${process.env.WORDPRESS_URL}/posts?_fields=acf,date,id,slug,title,content?per_page=100`;
+  const url = `https://oshnn.btreiner.com/wp-json/wp/v2/posts?_fields=acf,date,id,slug,title,content`;
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -54,7 +41,8 @@ async function postHandler(): Promise<PostQueryData[]> {
 // Retrieves data for all pages
 // If more than one page, requests all API pages and puts them into one array
 async function pageHandler(): Promise<PageQueryData[]> {
-  const url = `${process.env.WORDPRESS_URL}/pages?_fields=content,id,title,slug`;
+  const url =
+    "https://oshnn.btreiner.com/wp-json/wp/v2/pages?_fields=content,id,title,slug";
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -82,7 +70,8 @@ async function pageHandler(): Promise<PageQueryData[]> {
 // Retrieves data for all pages
 // If more than one page, requests all API pages and puts them into one array
 async function categoryHandler(): Promise<CategoryQueryData[]> {
-  const url = `${process.env.WORDPRESS_URL}/categories?_fields=id,name,parent,slug`;
+  const url =
+    "https://oshnn.btreiner.com/wp-json/wp/v2/categories?_fields=id,name,parent,slug";
 
   const response = await fetch(url, { method: "GET" });
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
@@ -111,28 +100,8 @@ async function categoryHandler(): Promise<CategoryQueryData[]> {
 }
 
 // Switch statement for which handler to use
-const queryHandler = {
+export const wpQueryHandler = {
   posts: postHandler,
   pages: pageHandler,
   categories: categoryHandler,
 };
-
-export default async function handler(
-  req: PostsRequest,
-  res: NextApiResponse<WordPressQueryData[] | ErrorMessage>,
-) {
-  if (req.method !== "GET") {
-    res.status(501).json({ message: "Only GET requests are supported." });
-  }
-
-  try {
-    const response = await queryHandler[req.body.type]();
-    res.status(200).json(response);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      res.status(500).json({ message: error.message });
-    } else {
-      res.status(500).json({ message: "An unknown problem occurred." });
-    }
-  }
-}
