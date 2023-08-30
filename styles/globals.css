@@ -1,10 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,100;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700;1,9..144,800;1,9..144,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* utopia.fyi fluid font sizes */
+    --step--2: clamp(0.61rem, calc(0.5rem + 0.28vw), 0.72rem);
+    --step--1: clamp(0.73rem, calc(0.56rem + 0.43vw), 0.9rem);
+    --step-0: clamp(0.88rem, calc(0.63rem + 0.63vw), 1.13rem);
+    --step-1: clamp(1.05rem, calc(0.69rem + 0.89vw), 1.41rem);
+    --step-2: clamp(1.26rem, calc(0.76rem + 1.25vw), 1.76rem);
+    --step-3: clamp(1.51rem, calc(0.83rem + 1.71vw), 2.2rem);
+    --step-4: clamp(1.81rem, calc(0.88rem + 2.33vw), 2.75rem);
+    --step-5: clamp(2.18rem, calc(0.92rem + 3.14vw), 3.43rem);
+
+    /* utopia.fyi fluid spacing */
+    --space-7xs: clamp(0.13rem, calc(0.13rem + 0vw), 0.13rem);
+    --space-6xs: clamp(0.25rem, calc(0.19rem + 0.16vw), 0.31rem);
+    --space-5xs: clamp(0.31rem, calc(0.19rem + 0.31vw), 0.44rem);
+    --space-4xs: clamp(0.44rem, calc(0.31rem + 0.31vw), 0.56rem);
+    --space-3xs: clamp(0.56rem, calc(0.44rem + 0.31vw), 0.69rem);
+    --space-2xs: clamp(0.69rem, calc(0.5rem + 0.47vw), 0.88rem);
+    --space-xs: clamp(0.75rem, calc(0.5rem + 0.63vw), 1rem);
+    --space-s: clamp(0.88rem, calc(0.63rem + 0.63vw), 1.13rem);
+    --space-m: clamp(1.13rem, calc(0.81rem + 0.78vw), 1.44rem);
+    --space-l: clamp(1.31rem, calc(0.94rem + 0.94vw), 1.69rem);
+    --space-xl: clamp(1.56rem, calc(1.13rem + 1.09vw), 2rem);
+    --space-2xl: clamp(1.75rem, calc(1.25rem + 1.25vw), 2.25rem);
+    --space-3xl: clamp(2rem, calc(1.44rem + 1.41vw), 2.56rem);
+    --space-4xl: clamp(2.19rem, calc(1.56rem + 1.56vw), 2.81rem);
+    --space-5xl: clamp(2.44rem, calc(1.75rem + 1.72vw), 3.13rem);
+    --space-6xl: clamp(2.63rem, calc(1.88rem + 1.88vw), 3.38rem);
+    --space-7xl: clamp(3.06rem, calc(2.19rem + 2.19vw), 3.94rem);
+    --space-8xl: clamp(3.5rem, calc(2.5rem + 2.5vw), 4.5rem);
+    --space-9xl: clamp(4.38rem, calc(3.13rem + 3.13vw), 5.63rem);
+    --space-10xl: clamp(5.25rem, calc(3.75rem + 3.75vw), 6.75rem);
+    --space-11xl: clamp(6.13rem, calc(4.38rem + 4.38vw), 7.88rem);
+    --space-12xl: clamp(7rem, calc(5rem + 5vw), 9rem);
+    --space-13xl: clamp(7.88rem, calc(5.63rem + 5.63vw), 10.13rem);
+    --space-14xl: clamp(8.75rem, calc(6.25rem + 6.25vw), 11.25rem);
+    --space-15xl: clamp(9.63rem, calc(6.88rem + 6.88vw), 12.38rem);
+    --space-16xl: clamp(10.5rem, calc(7.5rem + 7.5vw), 13.5rem);
+    --space-17xl: clamp(11.38rem, calc(8.13rem + 8.13vw), 14.63rem);
+    --space-18xl: clamp(12.25rem, calc(8.75rem + 8.75vw), 15.75rem);
+    --space-19xl: clamp(13.13rem, calc(9.38rem + 9.38vw), 16.88rem);
+    --space-20xl: clamp(14rem, calc(10rem + 10vw), 18rem);
+    --space-21xl: clamp(15.75rem, calc(11.25rem + 11.25vw), 20.25rem);
+    --space-22xl: clamp(17.5rem, calc(12.5rem + 12.5vw), 22.5rem);
+    --space-23xl: clamp(21rem, calc(15rem + 15vw), 27rem);
+  }
+
+  html {
+    font-family: "Jost", sans-serif;
+  }
+
   body {
-    @apply bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-slate-50;
+    @apply bg-slate-50 text-base text-slate-950 dark:bg-slate-950 dark:text-slate-50;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Fraunces", serif;
+  }
+
+  h1 {
   }
 }
 
