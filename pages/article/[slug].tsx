@@ -1,9 +1,13 @@
+import React from "react";
+import Link from "next/link";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
-import { Category } from "@/utils/types/blog";
-import { PostData } from "@/utils/types/wordpressQueries";
-import { GetStaticPaths, GetStaticProps } from "next";
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleDollarToSlot } from "@fortawesome/free-solid-svg-icons";
+import type { PostData } from "@/utils/types/wordpressQueries";
+import type { Category } from "@/utils/types/blog";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import dayjs from "dayjs";
 
 interface ArticleProps {
   title: string;
@@ -70,10 +74,39 @@ function Page(props: ArticleProps) {
     categories,
   } = props;
 
+  const renderedDate = dayjs(publicationDate).format("MMMM D, YYYY");
+
+  const categoryLinks = categories.map((category, index) => [
+    index > 0 && ", ",
+    <Link key={category.id} href={`/categories/${category.slug}`}>
+      {category.title}
+    </Link>,
+  ]);
+
   return (
     <PrimaryLayout>
-      <article>
-        <h1>{title}</h1>
+      <article className="flex flex-col gap-2">
+        <h1 className="text-3xl">
+          {title}
+          {paywall && (
+            <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
+          )}
+        </h1>
+        <div className="flex gap-4 divide-x">
+          <span>{publicationTitle}</span>
+          <span className="pl-4">{articleAuthors}</span>
+          <span className="pl-4">{renderedDate}</span>
+        </div>
+        <section dangerouslySetInnerHTML={{ __html: content }} />
+        <Link
+          target="_blank"
+          rel="noreferrer noopener"
+          href={articleUrl}
+          className="block self-center"
+        >
+          Read more at {publicationTitle}
+        </Link>
+        <div>Topics: {categoryLinks}</div>
       </article>
     </PrimaryLayout>
   );

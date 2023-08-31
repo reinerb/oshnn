@@ -44,11 +44,11 @@ async function categoryQueryHandler(
   // If the params object is present and the fields object is not empty,
   // join all of the elements with commas
   const fieldString = params?.fields ? `,${params.fields.join(",")}` : "";
-  const slugString = params?.slug ? `,?slug=${params.slug}` : "";
-  const idString = params?.id ? `,?id=${params.id}` : "";
+  const slugString = params?.slug ? `,&slug=${params.slug}` : "";
+  const idString = params?.id ? `,&id=${params.id}` : "";
 
   // Construct the URL
-  const url = `${WP_URL}/wp-json/wp/v2/categories?_fields=id,title,slug${fieldString}${slugString}${idString}`;
+  const url = `${WP_URL}/wp-json/wp/v2/categories?_fields=id,name,slug${fieldString}${slugString}${idString}`;
 
   // Fetch from that URL
   const response = await fetch(url, { method: "GET" });
@@ -57,15 +57,22 @@ async function categoryQueryHandler(
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
   let queryData: CategoryResponse[] = await response.json();
 
+  console.log("first");
+  console.log(queryData);
+
   // Fetch all pages
   if (pagination > 1) {
     for (let i = 2; i <= pagination; i++) {
-      let newResponse: CategoryResponse[] = await fetch(`${url}?page=${i}`, {
+      let newResponse: CategoryResponse[] = await fetch(`${url}&page=${i}`, {
         method: "GET",
       }).then((res) => res.json());
       queryData = [...queryData, ...newResponse];
+      console.log(i);
+      console.log(queryData);
     }
   }
+
+  // console.log(queryData);
 
   const cleanData: WordPressResponse[] = queryData.map(
     ({ name, ...category }) => {
@@ -86,8 +93,8 @@ async function postPageQueryHandler(
   // If the params object is present and the fields object is not empty,
   // join all of the elements with commas
   const fieldString = params?.fields ? `,${params.fields.join(",")}` : "";
-  const slugString = params?.slug ? `,?slug=${params.slug}` : "";
-  const idString = params?.id ? `,?id=${params.id}` : "";
+  const slugString = params?.slug ? `,&slug=${params.slug}` : "";
+  const idString = params?.id ? `,&id=${params.id}` : "";
 
   // Construct the URL
   const url = `${WP_URL}/wp-json/wp/v2/${type}?_fields=id,title,slug${fieldString}${slugString}${idString}`;
@@ -102,7 +109,7 @@ async function postPageQueryHandler(
   // Fetch all pages
   if (pagination > 1) {
     for (let i = 2; i <= pagination; i++) {
-      let newResponse: WordPressResponse[] = await fetch(`${url}?page=${i}`, {
+      let newResponse: WordPressResponse[] = await fetch(`${url}&page=${i}`, {
         method: "GET",
       }).then((res) => res.json());
       queryData = [...queryData, ...newResponse];
