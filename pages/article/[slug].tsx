@@ -8,6 +8,7 @@ import type { PostData } from "@/utils/types/wordpressQueries";
 import type { Category } from "@/utils/types/blog";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import dayjs from "dayjs";
+import ShareButton from "@/utils/components/ShareButton";
 
 interface ArticleProps {
   title: string;
@@ -86,7 +87,7 @@ function Page(props: ArticleProps) {
   return (
     <PrimaryLayout>
       <article className="flex flex-col gap-2">
-        <h1 className="text-3xl">
+        <h1 className="text-2xl">
           {title}
           {paywall && (
             <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
@@ -108,6 +109,19 @@ function Page(props: ArticleProps) {
         </Link>
         <div>Topics: {categoryLinks}</div>
       </article>
+      <section className="flex justify-between">
+        <h2 className="block text-lg">Share this article</h2>
+        <div id="share-buttons" className="flex items-center gap-3 text-lg">
+          <ShareButton shareTo="facebook" url={location.href} />
+          <ShareButton shareTo="twitter" url={location.href} />
+          <ShareButton shareTo="linkedin" url={location.href} />
+          <ShareButton shareTo="email" url={location.href} />
+          <ShareButton shareTo="clipboard" url={location.href} />
+        </div>
+      </section>
+      <section>
+        <h2 className="text-xl">Related posts</h2>
+      </section>
     </PrimaryLayout>
   );
 }
