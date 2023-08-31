@@ -76,6 +76,6 @@
 
 @layer components {
   header a {
-    @apply transition-colors duration-300 hover:text-slate-800 dark:hover:text-slate-200;
+    @apply transition-colors duration-200 hover:text-slate-700 dark:hover:text-slate-300;
   }
 }

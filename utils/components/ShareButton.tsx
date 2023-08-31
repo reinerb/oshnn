@@ -28,9 +28,11 @@ const icons = {
 };
 
 function ShareButton(props: ShareButtonProps) {
-  const { shareTo, quote } = props;
+  const { shareTo, quote, className } = props;
 
-  const icon = <FontAwesomeIcon icon={icons[shareTo]} />;
+  const styles = `text-slate-950 transition-colors duration-200 hover:text-slate-700 dark:text-slate-50 dark:hover:text-slate-300 ${className}`;
+
+  const icon = <FontAwesomeIcon icon={icons[shareTo]} className={styles} />;
 
   if (shareTo === "facebook") {
     return (
@@ -70,7 +72,7 @@ function ShareButton(props: ShareButtonProps) {
       <FontAwesomeIcon
         icon={icons[shareTo]}
         onClick={() => navigator.clipboard.writeText(window.location.href)}
-        className="cursor-pointer"
+        className={`cursor-pointer ${styles}`}
       />
     );
   }
