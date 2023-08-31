@@ -9,6 +9,7 @@ import type { Category } from "@/utils/types/blog";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 const ShareButton = dynamic(() => import("@/utils/components/ShareButton"), {
   ssr: false,
@@ -88,45 +89,55 @@ function Page(props: ArticleProps) {
     </Link>,
   ]);
 
+  const truncatedTitle = title.substring(0, 30);
+
   return (
-    <PrimaryLayout className="flex flex-col gap-4">
-      <article className="flex flex-col gap-2">
-        <h1 className="text-2xl">
-          {title}
-          {paywall && (
-            <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
-          )}
-        </h1>
-        <div className="flex gap-4 divide-x">
-          <span>{publicationTitle}</span>
-          <span className="pl-4">{articleAuthors}</span>
-          <span className="pl-4">{renderedDate}</span>
-        </div>
-        <section dangerouslySetInnerHTML={{ __html: content }} />
-        <Link
-          target="_blank"
-          rel="noreferrer noopener"
-          href={articleUrl}
-          className="block self-center"
-        >
-          Read more at {publicationTitle}
-        </Link>
-        <div>Topics: {categoryLinks}</div>
-      </article>
-      <section className="flex justify-between rounded-md bg-slate-200 px-4 py-2 dark:bg-slate-800">
-        <h2 className="block text-lg">Share this article</h2>
-        <div id="share-buttons" className="flex items-center gap-3 text-lg">
-          <ShareButton shareTo="facebook" quote={title} />
-          <ShareButton shareTo="twitter" quote={title} />
-          <ShareButton shareTo="linkedin" quote={title} />
-          <ShareButton shareTo="email" quote={title} />
-          <ShareButton shareTo="clipboard" quote={title} />
-        </div>
-      </section>
-      <section>
-        <h2 className="text-xl">Related posts</h2>
-      </section>
-    </PrimaryLayout>
+    <>
+      <Head>
+        <title>
+          {truncatedTitle}
+          {truncatedTitle !== title && "..."} | OSHNN
+        </title>
+      </Head>
+      <PrimaryLayout className="flex flex-col gap-4">
+        <article className="flex flex-col gap-2">
+          <h1 className="text-2xl">
+            {title}
+            {paywall && (
+              <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
+            )}
+          </h1>
+          <div className="flex gap-4 divide-x">
+            <span>{publicationTitle}</span>
+            <span className="pl-4">{articleAuthors}</span>
+            <span className="pl-4">{renderedDate}</span>
+          </div>
+          <section dangerouslySetInnerHTML={{ __html: content }} />
+          <Link
+            target="_blank"
+            rel="noreferrer noopener"
+            href={articleUrl}
+            className="block self-center"
+          >
+            Read more at {publicationTitle}
+          </Link>
+          <div>Topics: {categoryLinks}</div>
+        </article>
+        <section className="flex justify-between rounded-md bg-slate-200 px-4 py-2 dark:bg-slate-800">
+          <h2 className="block text-lg">Share this article</h2>
+          <div id="share-buttons" className="flex items-center gap-3 text-lg">
+            <ShareButton shareTo="facebook" quote={title} />
+            <ShareButton shareTo="twitter" quote={title} />
+            <ShareButton shareTo="linkedin" quote={title} />
+            <ShareButton shareTo="email" quote={title} />
+            <ShareButton shareTo="clipboard" quote={title} />
+          </div>
+        </section>
+        <section>
+          <h2 className="text-xl">Related posts</h2>
+        </section>
+      </PrimaryLayout>
+    </>
   );
 }
 
