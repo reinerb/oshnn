@@ -57,9 +57,6 @@ async function categoryQueryHandler(
   const pagination = await Number(response.headers.get("X-WP-TotalPages"));
   let queryData: CategoryResponse[] = await response.json();
 
-  console.log("first");
-  console.log(queryData);
-
   // Fetch all pages
   if (pagination > 1) {
     for (let i = 2; i <= pagination; i++) {
@@ -67,12 +64,8 @@ async function categoryQueryHandler(
         method: "GET",
       }).then((res) => res.json());
       queryData = [...queryData, ...newResponse];
-      console.log(i);
-      console.log(queryData);
     }
   }
-
-  // console.log(queryData);
 
   const cleanData: WordPressResponse[] = queryData.map(
     ({ name, ...category }) => {
