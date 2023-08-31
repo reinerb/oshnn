@@ -1,67 +1,44 @@
-type BaseQueryData = {
+export type WordPressQueryType = "posts" | "pages" | "categories";
+
+export type WordPressQueryParams = {
+  fields?: WordPressField[];
+};
+
+export type WordPressResponse = {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  slug: string;
+  content?: {
+    rendered: string;
+    protected: boolean;
+  };
+  categories?: number[];
+  acf?: ACFData;
+  date?: string;
+  parent: number;
+};
+
+export type WordPressData = {
   id: number;
   title: string;
   slug: string;
+  content?: string;
+  categories?: number[];
+  acf?: ACFData;
+  date?: string;
+  parent?: number;
 };
 
-export type CategoryQueryData = BaseQueryData & {
-  parentId: number;
-};
+type WordPressField = "content" | "categories" | "acf" | "date" | "parent";
 
-export type PageQueryData = BaseQueryData & {
-  content: string;
-};
-
-export type PostQueryData = BaseQueryData & {
-  acf: ACFData | [];
-  postDate: string;
-  content: string;
-  categories: number[];
-};
-
-type ACFData = {
-  articleUrl: string;
-  articleAuthors: string;
-  publicationDate: string;
-  publicationTitle: string;
-  paywall: boolean;
-};
-
-export type WordPressQueryData =
-  | PostQueryData
-  | PageQueryData
-  | CategoryQueryData;
-
-export type RawPostQueryData = {
-  acf: ACFData | [];
-  categories: number[];
-  content: {
-    rendered: string;
-    protected: boolean;
-  };
-  date: string;
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-};
-
-export type RawPageQueryData = {
-  content: {
-    rendered: string;
-    protected: boolean;
-  };
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-};
-
-export type RawCategoryQueryData = {
-  id: number;
-  name: string;
-  parent: number;
-  slug: string;
-};
+type ACFData =
+  | {
+      articleUrl: string;
+      articleAuthors: string;
+      publicationDate: string;
+      publicationTitle: string;
+      paywall: boolean;
+    }
+  | [];
