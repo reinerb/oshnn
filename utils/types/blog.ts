@@ -12,18 +12,18 @@ export type Page = BaseData & {
 
 export type Post = BaseData & {
   content: string;
-  postDate: Dayjs;
+  postDate: string;
   categories: Category[];
 };
 
 export type ArticlePost = Post & {
   articleUrl: string;
   articleAuthors: string[];
-  articleDate: Dayjs;
+  articleDate: string;
   articleSource: string;
 };
 
 export type Category = BaseData & {
-  parentId: number;
+  parentId?: number;
   description?: string;
 };
