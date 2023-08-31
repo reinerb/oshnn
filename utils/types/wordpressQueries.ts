@@ -2,6 +2,8 @@ export type WordPressQueryType = "posts" | "pages" | "categories";
 
 export type WordPressQueryParams = {
   fields?: WordPressField[];
+  slug?: string;
+  id?: number;
 };
 
 export type WordPressResponse = {
@@ -17,7 +19,14 @@ export type WordPressResponse = {
   categories?: number[];
   acf?: ACFData;
   date?: string;
-  parent: number;
+  parent?: number;
+};
+
+export type CategoryResponse = {
+  id: number;
+  name: string;
+  slug: string;
+  parent?: number;
 };
 
 export type WordPressData = {
@@ -31,14 +40,21 @@ export type WordPressData = {
   parent?: number;
 };
 
+export type PostData = {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  categories: number[];
+  acf: ACFData;
+};
+
 type WordPressField = "content" | "categories" | "acf" | "date" | "parent";
 
-type ACFData =
-  | {
-      articleUrl: string;
-      articleAuthors: string;
-      publicationDate: string;
-      publicationTitle: string;
-      paywall: boolean;
-    }
-  | [];
+type ACFData = {
+  articleUrl: string;
+  articleAuthors: string;
+  publicationDate: string;
+  publicationTitle: string;
+  paywall: boolean;
+};
