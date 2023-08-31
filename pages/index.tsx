@@ -9,8 +9,6 @@ export async function getStaticProps() {
     fields: ["acf", "date", "categories"],
   });
 
-  console.log(posts);
-
   return { props: { posts } };
 }
 
