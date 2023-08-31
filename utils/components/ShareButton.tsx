@@ -73,6 +73,7 @@ function ShareButton(props: ShareButtonProps) {
         icon={icons[shareTo]}
         onClick={() => navigator.clipboard.writeText(window.location.href)}
         className={`cursor-pointer ${styles}`}
+        aria-label="copy-to-clipboard"
       />
     );
   }
