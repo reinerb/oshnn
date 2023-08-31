@@ -11,7 +11,7 @@ function PrimaryLayout(props: Props) {
   return (
     <>
       <Header />
-      <div className="flex min-h-screen justify-center">
+      <div className="flex justify-center">
         <main className="container mx-8">{children}</main>
       </div>
     </>
