@@ -89,7 +89,7 @@ function Page(props: ArticleProps) {
   ]);
 
   return (
-    <PrimaryLayout>
+    <PrimaryLayout className="flex flex-col gap-4">
       <article className="flex flex-col gap-2">
         <h1 className="text-2xl">
           {title}
@@ -113,7 +113,7 @@ function Page(props: ArticleProps) {
         </Link>
         <div>Topics: {categoryLinks}</div>
       </article>
-      <section className="flex justify-between">
+      <section className="flex justify-between rounded-md bg-slate-200 px-4 py-2 dark:bg-slate-800">
         <h2 className="block text-lg">Share this article</h2>
         <div id="share-buttons" className="flex items-center gap-3 text-lg">
           <ShareButton shareTo="facebook" quote={title} />

@@ -3,16 +3,17 @@ import Header from "../components/Header";
 
 interface Props {
   children?: React.ReactNode;
+  className?: string;
 }
 
 function PrimaryLayout(props: Props) {
-  const { children } = props;
+  const { children, className } = props;
 
   return (
     <>
       <Header />
       <div className="flex justify-center">
-        <main className="container mx-8">{children}</main>
+        <main className={`container mx-8 ${className}`}>{children}</main>
       </div>
     </>
   );
