@@ -10,10 +10,14 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import ShareButtons from "@/utils/components/ShareButtons/ShareButtons";
 
-const ShareButton = dynamic(() => import("@/utils/components/ShareButton"), {
-  ssr: false,
-});
+const ShareButton = dynamic(
+  () => import("@/utils/components/ShareButtons/ShareButton"),
+  {
+    ssr: false,
+  },
+);
 
 interface ArticleProps {
   title: string;
@@ -123,16 +127,7 @@ function Page(props: ArticleProps) {
           </Link>
           <div>Topics: {categoryLinks}</div>
         </article>
-        <section className="flex justify-between rounded-md bg-slate-200 px-4 py-2 dark:bg-slate-800">
-          <h2 className="block text-lg">Share this article</h2>
-          <div id="share-buttons" className="flex items-center gap-3 text-lg">
-            <ShareButton shareTo="facebook" quote={title} />
-            <ShareButton shareTo="twitter" quote={title} />
-            <ShareButton shareTo="linkedin" quote={title} />
-            <ShareButton shareTo="email" quote={title} />
-            <ShareButton shareTo="clipboard" quote={title} />
-          </div>
-        </section>
+        <ShareButtons callToAction="Share This Article" quote={title} />
         <section>
           <h2 className="text-xl">Related posts</h2>
         </section>
