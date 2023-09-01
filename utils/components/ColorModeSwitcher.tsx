@@ -19,7 +19,7 @@ function ColorModeSwitcher(props: Props) {
   return (
     <FontAwesomeIcon
       icon={theme === "dark" ? faMoon : faSun}
-      className={`cursor-pointer text-xl text-slate-950 hover:text-slate-800 dark:text-slate-50 dark:hover:text-slate-200 ${className}`}
+      className={`cursor-pointer text-xl text-slate-950 transition-colors duration-200 hover:text-slate-800 dark:text-slate-50 dark:hover:text-slate-200 ${className}`}
       onClick={toggleTheme}
     />
   );
