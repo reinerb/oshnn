@@ -1,7 +1,8 @@
 import Head from "next/head";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
-import ArticleBlock from "@/utils/components/ArticleBlock";
+import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
+import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 
 interface HomepageArticleProps {
   id: number;
@@ -40,9 +41,11 @@ export default function Home({ posts }: HomepageProps) {
         <title>OSHNN | Ocean State Health News Net</title>
       </Head>
       <PrimaryLayout>
-        {posts.map(({ id, ...post }) => {
-          return <ArticleBlock key={id} {...post} />;
-        })}
+        <ArticleGrid title="Latest">
+          {posts.map(({ id, ...post }) => {
+            return <ArticleBlock key={id} {...post} />;
+          })}
+        </ArticleGrid>
       </PrimaryLayout>
     </>
   );
