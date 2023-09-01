@@ -10,10 +10,10 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import ShareButtons from "@/utils/components/ShareButtons/ShareButtons";
+import LinkButton from "@/utils/components/LinkButton";
 
-const ShareButton = dynamic(
-  () => import("@/utils/components/ShareButtons/ShareButton"),
+const ShareButtons = dynamic(
+  () => import("@/utils/components/ShareButtons/ShareButtons"),
   {
     ssr: false,
   },
@@ -117,14 +117,14 @@ function Page(props: ArticleProps) {
             <span className="pl-4">{renderedDate}</span>
           </div>
           <section dangerouslySetInnerHTML={{ __html: content }} />
-          <Link
+          <LinkButton
             target="_blank"
             rel="noreferrer noopener"
             href={articleUrl}
             className="block self-center"
           >
             Read more at {publicationTitle}
-          </Link>
+          </LinkButton>
           <div>Topics: {categoryLinks}</div>
         </article>
         <ShareButtons callToAction="Share This Article" quote={title} />
