@@ -1,3 +1,4 @@
+import { decode } from "html-entities";
 import type {
   WordPressQueryType,
   WordPressQueryParams,
@@ -31,7 +32,7 @@ export async function wpQueryHandler(
     let data = {
       ...element,
       content: element.content?.rendered,
-      title: element.title.rendered,
+      title: decode(element.title.rendered),
     };
 
     return JSON.parse(JSON.stringify(data));
