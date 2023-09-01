@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,100;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700;1,9..144,800;1,9..144,900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -61,21 +60,21 @@
     @apply bg-slate-50 text-base text-slate-950 dark:bg-slate-950 dark:text-slate-50;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Fraunces", serif;
+  h1 {
+    @apply font-bold;
   }
 
-  h1 {
+  h2 {
+    @apply font-semibold;
   }
 }
 
 @layer components {
   header a {
     @apply transition-colors duration-200 hover:text-slate-700 dark:hover:text-slate-300;
+  }
+
+  .link-button {
+    @apply block rounded-md border border-blue-500 px-4 py-2 text-blue-500 transition-colors duration-200 hover:border-blue-600 hover:text-blue-600 active:border-blue-700 active:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400 dark:active:border-blue-300 dark:active:text-blue-300;
   }
 }
