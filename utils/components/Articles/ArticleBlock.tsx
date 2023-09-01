@@ -25,7 +25,7 @@ function ArticleBlock(props: ArticleBlockProps) {
       <h3 className="mb-1 block text-lg font-medium text-blue-500 transition-colors duration-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">
         {title}
       </h3>
-      <div className="flex gap-1 divide-x divide-blue-700 leading-tight text-blue-700 dark:divide-blue-300 dark:text-blue-300">
+      <div className="mt-auto flex gap-1 divide-x divide-blue-700 leading-tight text-blue-700 dark:divide-blue-300 dark:text-blue-300">
         <span>{publicationTitle}</span>
         <span className="pl-1">{renderedDate}</span>
         {paywall && (
