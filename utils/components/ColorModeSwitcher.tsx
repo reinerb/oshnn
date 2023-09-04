@@ -1,7 +1,9 @@
+"use client";
+
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   className?: string;
@@ -9,16 +11,15 @@ interface Props {
 
 function ColorModeSwitcher(props: Props) {
   const { className } = props;
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const { resolvedTheme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark");
+    resolvedTheme === "dark" ? setTheme("light") : setTheme("dark");
   };
 
   return (
     <FontAwesomeIcon
-      icon={theme === "dark" ? faMoon : faSun}
+      icon={resolvedTheme === "dark" ? faMoon : faSun}
       className={`cursor-pointer text-xl text-slate-950 transition-colors duration-200 hover:text-slate-800 dark:text-slate-50 dark:hover:text-slate-200 ${className}`}
       onClick={toggleTheme}
     />
