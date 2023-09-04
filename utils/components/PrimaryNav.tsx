@@ -16,7 +16,7 @@ function PrimaryNav() {
           <a href="/about">About</a>
         </li>
         <li>
-          <a href="/contact">Contact</a>
+          <a href="/newsletter">Newsletter Signup</a>
         </li>
         <li>
           <ColorModeSwitcher />
