@@ -3,7 +3,7 @@
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTheme } from "next-themes";
-import React, { useEffect } from "react";
+import React from "react";
 
 interface Props {
   className?: string;
