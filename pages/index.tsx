@@ -6,6 +6,8 @@ import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
 import LinkButton from "@/utils/components/LinkButton";
 import SearchBar from "@/utils/components/SearchBar";
+import type { Category } from "@/utils/types/blog";
+import type { RawCategory } from "@/utils/types/wordpressQueries";
 
 type HomepageArticle = {
   id: number;
@@ -21,22 +23,20 @@ type HomepageProps = {
   trending: HomepageArticle[];
   national: HomepageArticle[];
   rhodeIsland: HomepageArticle[];
+  topics: Topics;
 };
 
-export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
+type Topics = {
+  national: Category;
+  rhodeIsland: Category;
+};
+
+const getPosts = async (): Promise<HomepageArticle[]> => {
   const postsQuery = await wpQueryHandler("posts", {
     fields: ["acf", "date", "categories"],
   });
 
-  const categories = await wpQueryHandler("categories");
-  const nationalId = categories.find(
-    (category) => category.title === "National",
-  )?.id as number;
-  const rhodeIslandId = categories.find(
-    (category) => category.title === "Rhode Island",
-  )?.id as number;
-
-  const posts = postsQuery.map(({ acf, ...post }) => {
+  return postsQuery.map(({ acf, ...post }) => {
     return {
       ...post,
       publicationDate: acf?.publicationDate,
@@ -44,22 +44,80 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
       paywall: acf?.paywall,
     } as HomepageArticle;
   });
+};
+
+const getTopics = async (): Promise<Topics> => {
+  const categories = (await wpQueryHandler("categories", {
+    fields: ["parent"],
+  })) as RawCategory[];
+
+  const national = categories.find(
+    (category) => category.title === "National",
+  ) as RawCategory;
+  const rhodeIsland = categories.find(
+    (category) => category.title === "Rhode Island",
+  ) as RawCategory;
+
+  const topics = {
+    national: {
+      id: national.id,
+      title: national.title,
+      slug: national.slug,
+      children: [] as Category[],
+    },
+    rhodeIsland: {
+      id: rhodeIsland.id,
+      title: rhodeIsland.title,
+      slug: rhodeIsland.slug,
+      children: [] as Category[],
+    },
+  };
+
+  categories.map(({ parent, ...category }) => {
+    if (parent === topics.national.id) {
+      topics.national.children = [
+        ...topics.national.children,
+        {
+          ...category,
+          children: [] as Category[],
+        },
+      ];
+    }
+
+    if (parent === topics.rhodeIsland.id) {
+      topics.rhodeIsland.children = [
+        ...topics.rhodeIsland.children,
+        {
+          ...category,
+          children: [] as Category[],
+        },
+      ];
+    }
+  });
+
+  return topics;
+};
+
+export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
+  const posts = await getPosts();
+  const topics = await getTopics();
 
   const trending = posts.slice(0, 4);
   const national = posts
-    .filter((post) => post.categories.includes(nationalId))
+    .filter((post) => post.categories.includes(topics.national.id))
     .slice(0, 4);
   const rhodeIsland = posts
-    .filter((post) => post.categories.includes(rhodeIslandId))
+    .filter((post) => post.categories.includes(topics.rhodeIsland.id))
     .slice(0, 4);
 
-  return { props: { trending, national, rhodeIsland } };
+  return { props: { trending, national, rhodeIsland, topics } };
 };
 
 export default function Home({
   trending,
   national,
   rhodeIsland,
+  topics,
 }: HomepageProps) {
   return (
     <>
@@ -86,11 +144,45 @@ export default function Home({
           {national.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
+          {topics.national.children && (
+            <>
+              <h3 className="col-span-full text-center text-lg">
+                National Topics
+              </h3>
+              <div className="col-span-full flex flex-wrap justify-center gap-2">
+                {topics.national.children?.map((topic) => (
+                  <LinkButton key={topic.id} href={`/topics/${topic.slug}`}>
+                    {topic.title}
+                  </LinkButton>
+                ))}
+                <LinkButton href="topics/national">
+                  All National Topics
+                </LinkButton>
+              </div>
+            </>
+          )}
         </ArticleGrid>
         <ArticleGrid title="Rhode Island">
           {rhodeIsland.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
+          {topics.rhodeIsland.children && (
+            <>
+              <h3 className="col-span-full text-center text-lg">
+                Rhode Island Topics
+              </h3>
+              <div className="col-span-full flex flex-wrap justify-center gap-2">
+                {topics.rhodeIsland.children?.map((topic) => (
+                  <LinkButton key={topic.id} href={`/topics/${topic.slug}`}>
+                    {topic.title}
+                  </LinkButton>
+                ))}
+                <LinkButton href="topics/rhode-island">
+                  All Rhode Island Topics
+                </LinkButton>
+              </div>
+            </>
+          )}
         </ArticleGrid>
         <section className="flex flex-col items-center gap-2">
           <h2 className="text-xl">Subscribe to our newsletter</h2>
