@@ -99,8 +99,7 @@ function Page(props: ArticleProps) {
     <>
       <Head>
         <title>
-          {truncatedTitle}
-          {truncatedTitle !== title && "..."} | OSHNN
+          {`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
         </title>
       </Head>
       <PrimaryLayout className="flex flex-col gap-4">
