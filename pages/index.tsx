@@ -5,6 +5,7 @@ import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
 import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
 import LinkButton from "@/utils/components/LinkButton";
+import SearchBar from "@/utils/components/SearchBar";
 
 type HomepageArticle = {
   id: number;
@@ -99,6 +100,7 @@ export default function Home({
           </p>
           <LinkButton href="/newsletter">Subscribe</LinkButton>
         </section>
+        <SearchBar action={(query) => console.log(query)} />
       </PrimaryLayout>
     </>
   );
