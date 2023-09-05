@@ -6,6 +6,11 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    extend: {
+      gridTemplateRows: {
+        body: "auto 1fr auto",
+      },
+    },
     fontSize: {
       xs: "var(--step--2)",
       sm: "var(--step--1)",
