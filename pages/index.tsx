@@ -140,49 +140,15 @@ export default function Home({
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
-        <ArticleGrid title="National">
+        <ArticleGrid title="National" topic={topics.national}>
           {national.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
-          {topics.national.children && (
-            <>
-              <h3 className="col-span-full text-center text-lg">
-                National Topics
-              </h3>
-              <div className="col-span-full flex flex-wrap justify-center gap-2">
-                {topics.national.children?.map((topic) => (
-                  <LinkButton key={topic.id} href={`/topics/${topic.slug}`}>
-                    {topic.title}
-                  </LinkButton>
-                ))}
-                <LinkButton href="topics/national">
-                  All National Topics
-                </LinkButton>
-              </div>
-            </>
-          )}
         </ArticleGrid>
-        <ArticleGrid title="Rhode Island">
+        <ArticleGrid title="Rhode Island" topic={topics.rhodeIsland}>
           {rhodeIsland.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
-          {topics.rhodeIsland.children && (
-            <>
-              <h3 className="col-span-full text-center text-lg">
-                Rhode Island Topics
-              </h3>
-              <div className="col-span-full flex flex-wrap justify-center gap-2">
-                {topics.rhodeIsland.children?.map((topic) => (
-                  <LinkButton key={topic.id} href={`/topics/${topic.slug}`}>
-                    {topic.title}
-                  </LinkButton>
-                ))}
-                <LinkButton href="topics/rhode-island">
-                  All Rhode Island Topics
-                </LinkButton>
-              </div>
-            </>
-          )}
         </ArticleGrid>
         <section className="flex flex-col items-center gap-2">
           <h2 className="text-xl">Subscribe to our newsletter</h2>
