@@ -104,12 +104,7 @@ function Page({
       </Head>
       <PrimaryLayout className="flex flex-col gap-4">
         <article className="flex flex-col gap-2">
-          <h1 className="text-2xl">
-            {title}
-            {paywall && (
-              <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
-            )}
-          </h1>
+          <h1 className="text-2xl">{title}</h1>
           <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
             <span>{publicationTitle}</span>
             <span className="sm:pl-4">{articleAuthors}</span>
@@ -122,7 +117,10 @@ function Page({
             href={articleUrl}
             className="block self-center"
           >
-            Read more at {publicationTitle}
+            Read more at {publicationTitle}{" "}
+            {paywall && (
+              <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-2" />
+            )}
           </LinkButton>
           <div>Topics: {categoryLinks}</div>
         </article>
