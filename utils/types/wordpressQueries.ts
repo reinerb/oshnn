@@ -29,6 +29,13 @@ export type CategoryResponse = {
   parent?: number;
 };
 
+export type RawCategory = {
+  id: number;
+  title: string;
+  slug: string;
+  parent?: number;
+};
+
 export type WordPressData = {
   id: number;
   title: string;

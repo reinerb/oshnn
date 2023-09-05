@@ -24,6 +24,6 @@ export type ArticlePost = Post & {
 };
 
 export type Category = BaseData & {
-  parentId?: number;
   description?: string;
+  children?: Category[];
 };
