@@ -1,5 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../components/PrimaryLayout/Header";
+import Footer from "../components/PrimaryLayout/Footer";
 
 interface Props {
   children?: React.ReactNode;
@@ -15,6 +16,7 @@ function PrimaryLayout(props: Props) {
       <div className="flex justify-center">
         <main className={`container mx-8 ${className}`}>{children}</main>
       </div>
+      <Footer />
     </>
   );
 }

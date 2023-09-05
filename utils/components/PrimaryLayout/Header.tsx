@@ -1,7 +1,7 @@
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import PrimaryNav from "./PrimaryNav";
+import PrimaryNav from "../PrimaryNav";
 
 function Header() {
   return (
