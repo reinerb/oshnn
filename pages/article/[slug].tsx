@@ -74,18 +74,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-function Page(props: ArticleProps) {
-  const {
-    title,
-    content,
-    publicationDate,
-    publicationTitle,
-    paywall,
-    articleUrl,
-    articleAuthors,
-    categories,
-  } = props;
-
+function Page({
+  title,
+  content,
+  publicationDate,
+  publicationTitle,
+  paywall,
+  articleUrl,
+  articleAuthors,
+  categories,
+}: ArticleProps) {
   const renderedDate = dayjs(publicationDate).format("MMMM D, YYYY");
 
   const categoryLinks = categories.map((category, index) => [
@@ -112,10 +110,10 @@ function Page(props: ArticleProps) {
               <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-4" />
             )}
           </h1>
-          <div className="flex gap-4 divide-x">
+          <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
             <span>{publicationTitle}</span>
-            <span className="pl-4">{articleAuthors}</span>
-            <span className="pl-4">{renderedDate}</span>
+            <span className="sm:pl-4">{articleAuthors}</span>
+            <span className="sm:pl-4">{renderedDate}</span>
           </div>
           <section dangerouslySetInnerHTML={{ __html: content }} />
           <LinkButton
