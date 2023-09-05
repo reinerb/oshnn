@@ -45,6 +45,8 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async (context) => {
     return postData.categories?.includes(category.id);
   });
 
+  categories.sort((a, b) => a.id - b.id);
+
   return {
     props: {
       title: postData.title,
