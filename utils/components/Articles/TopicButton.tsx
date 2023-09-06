@@ -10,9 +10,9 @@ type Props = {
 
 function TopicButton({ href, children, inverted, className }: Props) {
   const invertedStyles =
-    "bg-blue-500 text-slate-50 hover:bg-blue-600 active:bg-blue-700 dark:hover:bg-blue-400 dark:active:bg-blue-300 hover:text-slate-50 active:text-slate-50 dark:hover:text-slate-50 dark:active:text-slate-50";
+    "bg-primary-500 text-neutral-50 hover:bg-primary-600 active:bg-primary-700 dark:hover:bg-primary-400 dark:active:bg-primary-300 hover:text-neutral-50 active:text-neutral-50 dark:hover:text-neutral-50 dark:active:text-neutral-50";
   const normalStyles =
-    "border border-blue-500 hover:border-blue-600 active:border-blue-700 dark:hover:border-blue-400 dark:active:border-blue-300";
+    "border border-primary-500 hover:border-primary-600 active:border-primary-700 dark:hover:border-primary-400 dark:active:border-primary-300";
 
   return (
     <Link

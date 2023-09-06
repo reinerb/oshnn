@@ -20,12 +20,12 @@ function ArticleBlock(props: ArticleBlockProps) {
   return (
     <Link
       href={`/article/${slug}`}
-      className="group flex h-full flex-col rounded-md border-2 border-blue-500 p-2 transition-colors duration-200 hover:border-blue-600 dark:hover:border-blue-400"
+      className="border-primary-500 hover:border-primary-600 dark:hover:border-primary-400 group flex h-full flex-col rounded-md border-2 p-2 transition-colors duration-200"
     >
-      <h3 className="mb-1 block text-lg font-medium text-blue-500 transition-colors duration-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+      <h3 className="text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-400 mb-1 block text-lg font-medium transition-colors duration-200">
         {title}
       </h3>
-      <div className="mt-auto flex gap-1 divide-x divide-blue-700 leading-tight text-blue-700 dark:divide-blue-300 dark:text-blue-300">
+      <div className="divide-primary-700 text-primary-700 dark:divide-primary-300 dark:text-primary-300 mt-auto flex gap-1 divide-x leading-tight">
         <span>{publicationTitle}</span>
         <span className="pl-1">{renderedDate}</span>
         {paywall && (

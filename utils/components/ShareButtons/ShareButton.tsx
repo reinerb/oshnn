@@ -30,7 +30,7 @@ const icons = {
 function ShareButton(props: ShareButtonProps) {
   const { shareTo, quote, className } = props;
 
-  const styles = `text-slate-950 transition-colors duration-200 hover:text-slate-700 dark:text-slate-50 dark:hover:text-slate-300 ${className}`;
+  const styles = `text-neutral-950 transition-colors duration-200 hover:text-neutral-700 dark:text-neutral-50 dark:hover:text-neutral-300 ${className}`;
 
   const icon = <FontAwesomeIcon icon={icons[shareTo]} className={styles} />;
 
