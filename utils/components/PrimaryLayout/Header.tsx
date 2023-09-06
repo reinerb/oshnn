@@ -1,7 +1,8 @@
-import { faDroplet } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faDroplet } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import PrimaryNav from "../PrimaryNav";
+import Logo from "../Logo";
 
 function Header() {
   return (
@@ -11,8 +12,7 @@ function Header() {
         id="logo"
         className="flex items-center gap-2 transition-colors duration-200"
       >
-        <FontAwesomeIcon icon={faDroplet} className="text-3xl" />
-        <span className="text-4xl font-extrabold ">OSHNN</span>
+        <Logo />
       </a>
       <PrimaryNav />
     </header>
