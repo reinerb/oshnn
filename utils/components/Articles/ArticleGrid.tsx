@@ -14,7 +14,7 @@ function ArticleGrid({ title, children, topic }: ArticleGridProps) {
       <h2 className="col-span-full text-center text-xl">{title}</h2>
       {children}
       {topic?.children && (
-        <div className="col-span-full flex flex-col gap-2">
+        <div className="flex flex-col flex-wrap gap-2 rounded-md bg-neutral-200 p-2 dark:bg-neutral-900">
           <h3 className="col-span-full text-center text-lg">
             {topic.title} Topics
           </h3>
