@@ -126,7 +126,7 @@ export default function Home({
         <title>OSHNN | Ocean State Health News Network</title>
       </Head>
       <PrimaryLayout className="flex flex-col gap-8">
-        <section className="flex flex-col items-center gap-2">
+        <section className="text-secondary-900 dark:text-secondary-300 flex flex-col items-center gap-2">
           <h1 className="text-center text-2xl 2xl:text-3xl">
             Ocean State Health News Network
           </h1>
@@ -136,34 +136,35 @@ export default function Home({
             news from around the country and Rhode Island.
           </p>
         </section>
-        <WaveDivider className="mx-auto my-2 max-w-xl" />
-        <ArticleGrid title="Latest">
+        <ArticleGrid title="Trending in Healthcare">
           {trending.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
-        <WaveDivider className="mx-auto my-2 max-w-xl" />
-        <ArticleGrid title="National" topic={topics.national}>
-          {national.map(({ id, ...post }) => {
-            return <ArticleBlock key={id} {...post} />;
-          })}
-        </ArticleGrid>
-        <WaveDivider className="mx-auto my-2 max-w-xl" />
-        <ArticleGrid title="Rhode Island" topic={topics.rhodeIsland}>
+        <WaveDivider className="mx-auto my-2 max-w-sm" />
+        <ArticleGrid
+          title="Rhode Island Healthcare Headlines"
+          topic={topics.rhodeIsland}
+        >
           {rhodeIsland.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
-        <WaveDivider className="mx-auto my-2 max-w-xl" />
-        <section className="flex flex-col items-center gap-2">
-          <h2 className="text-xl">Subscribe to our newsletter</h2>
+        <WaveDivider className="mx-auto my-2 max-w-sm" />
+        <ArticleGrid title="US Healthcare Headlines" topic={topics.national}>
+          {national.map(({ id, ...post }) => {
+            return <ArticleBlock key={id} {...post} />;
+          })}
+        </ArticleGrid>
+        <WaveDivider className="mx-auto my-2 max-w-sm" />
+        <section className="bg-secondary-800 dark:bg-secondary-200 flex max-w-fit flex-col items-center gap-2 self-center rounded-md px-8 py-4 text-neutral-50 dark:text-neutral-950">
+          <h2 className="text-xl">Subscribe</h2>
           <p>
             Sign up today and stay informed. Receive the latest curated
             healthcare news in your inbox on a biweekly basis.
           </p>
           <LinkButton href="/newsletter">Subscribe</LinkButton>
         </section>
-        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <SearchBar action={(query) => console.log(query)} />
       </PrimaryLayout>
     </>
