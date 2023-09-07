@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function Header() {
   return (
-    <header className="flex flex-col items-center px-8 py-4 md:flex-row md:justify-between">
+    <header className="flex flex-col items-center gap-4 px-8 py-4 md:flex-row md:justify-between">
       <Link href="/" id="logo" aria-label="home">
         <Logo className="hover:fill-secondary-600 active:fill-secondary-700 dark:hover:fill-secondary-400 dark:active:fill-secondary-300" />
       </Link>

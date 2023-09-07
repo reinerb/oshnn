@@ -15,7 +15,7 @@ function PrimaryLayout({ children, className }: PrimaryLayoutProps) {
       <div className="flex justify-center">
         <main className={`container mx-8 ${className}`}>{children}</main>
       </div>
-      <FooterDivider className="container mx-auto my-8" />
+      <FooterDivider className="container mx-auto my-4 md:my-8" />
       <Footer />
     </div>
   );
