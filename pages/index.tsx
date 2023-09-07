@@ -103,13 +103,13 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
   const posts = await getPosts();
   const topics = await getTopics();
 
-  const trending = posts.slice(0, 4);
+  const trending = posts.slice(0, 6);
   const national = posts
     .filter((post) => post.categories.includes(topics.national.id))
-    .slice(0, 4);
+    .slice(0, 5);
   const rhodeIsland = posts
     .filter((post) => post.categories.includes(topics.rhodeIsland.id))
-    .slice(0, 4);
+    .slice(0, 5);
 
   return { props: { trending, national, rhodeIsland, topics } };
 };
