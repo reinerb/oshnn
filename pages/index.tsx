@@ -157,13 +157,13 @@ export default function Home({
           })}
         </ArticleGrid>
         <WaveDivider className="mx-auto my-2 max-w-sm" />
-        <section className="bg-primary-800 dark:bg-primary-200 flex max-w-fit flex-col items-center gap-2 self-center rounded-md px-8 py-4 text-neutral-50 dark:text-neutral-950">
+        <section className="bg-primary-900 dark:bg-primary-100 flex max-w-fit flex-col items-center gap-2 self-center rounded-md px-8 py-4 text-neutral-50 dark:text-neutral-950">
           <h2 className="text-xl">Subscribe</h2>
           <p>
             Sign up today and stay informed. Receive the latest curated
             healthcare news in your inbox on a biweekly basis.
           </p>
-          <LinkButton href="/newsletter" inverted>
+          <LinkButton href="/newsletter" inverted primary>
             Subscribe
           </LinkButton>
         </section>
