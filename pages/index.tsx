@@ -124,6 +124,12 @@ export default function Home({
     <>
       <Head>
         <title>OSHNN | Ocean State Health News Network</title>
+        <meta
+          name="description"
+          content="OSHNN navigates the intricate landscape of medical advancements and
+            wellness insights to bring you the latest developments in healthcare
+            news from around Rhode Island and the rest of the country."
+        />
       </Head>
       <PrimaryLayout className="flex flex-col gap-8">
         <section className="text-primary-900 dark:text-primary-300 flex flex-col items-center gap-2">
@@ -133,7 +139,7 @@ export default function Home({
           <p className="max-w-6xl text-center">
             OSHNN navigates the intricate landscape of medical advancements and
             wellness insights to bring you the latest developments in healthcare
-            news from around the country and Rhode Island.
+            news from around Rhode Island and the rest of the country.
           </p>
         </section>
         <ArticleGrid title="Trending in Healthcare">
