@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/PrimaryLayout/Header";
 import Footer from "../components/PrimaryLayout/Footer";
+import FooterDivider from "../components/PrimaryLayout/FooterDivider";
 
 type PrimaryLayoutProps = {
   children?: React.ReactNode;
@@ -14,6 +15,7 @@ function PrimaryLayout({ children, className }: PrimaryLayoutProps) {
       <div className="flex justify-center">
         <main className={`container mx-8 ${className}`}>{children}</main>
       </div>
+      <FooterDivider className="container mx-auto my-4" />
       <Footer />
     </div>
   );
