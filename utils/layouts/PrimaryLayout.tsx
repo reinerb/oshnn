@@ -10,14 +10,16 @@ type PrimaryLayoutProps = {
 
 function PrimaryLayout({ children, className }: PrimaryLayoutProps) {
   return (
-    <div className="grid-rows-body grid min-h-screen">
-      <Header />
-      <div className="flex justify-center">
-        <main className={`container mx-8 ${className}`}>{children}</main>
+    <>
+      <div className={`grid-rows-body grid min-h-screen`}>
+        <Header />
+        <div className="flex justify-center">
+          <main className={`container mx-8 ${className}`}>{children}</main>
+        </div>
+        <FooterDivider className="container mx-auto my-4 md:my-8" />
+        <Footer />
       </div>
-      <FooterDivider className="container mx-auto my-4 md:my-8" />
-      <Footer />
-    </div>
+    </>
   );
 }
 

@@ -7,6 +7,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        jost: ["var(--font-jost)"],
+      },
       gridTemplateRows: {
         body: "auto 1fr auto",
       },
