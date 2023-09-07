@@ -18,14 +18,15 @@ function ColorModeSwitcher({ className }: ColorModeSwitcherProps) {
   };
 
   return (
-    <FontAwesomeIcon
-      icon={resolvedTheme === "dark" ? faMoon : faSun}
+    <button
       className={twMerge(
-        "cursor-pointer text-xl text-neutral-950 transition-colors duration-200 hover:text-neutral-800 dark:text-neutral-50 dark:hover:text-neutral-200",
+        "cursor-pointer text-xl text-neutral-950 transition-colors duration-200 hover:text-neutral-800 active:text-neutral-700 dark:text-neutral-50 dark:hover:text-neutral-200 dark:active:text-neutral-300",
         className,
       )}
       onClick={toggleTheme}
-    />
+    >
+      <FontAwesomeIcon icon={resolvedTheme === "dark" ? faMoon : faSun} />
+    </button>
   );
 }
 
