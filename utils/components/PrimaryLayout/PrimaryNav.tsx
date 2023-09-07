@@ -1,7 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const ColorModeSwitcher = dynamic(() => import("./ColorModeSwitcher"), {
+const ColorModeSwitcher = dynamic(() => import("../ColorModeSwitcher"), {
   ssr: false,
 });
 
@@ -17,9 +17,6 @@ function PrimaryNav() {
         </li>
         <li>
           <a href="/newsletter">Newsletter Signup</a>
-        </li>
-        <li>
-          <ColorModeSwitcher />
         </li>
       </ul>
     </nav>
