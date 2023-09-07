@@ -1,4 +1,5 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   className?: string;
@@ -10,7 +11,10 @@ function Logo({ className }: Props) {
       id="svg"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      className={`fill-secondary-500 h-20 w-20 transition-colors duration-200 sm:h-24 sm:w-24 lg:h-28 lg:w-28 ${className}`}
+      className={twMerge(
+        "fill-secondary-500 h-20 w-20 transition-colors duration-200 sm:h-24 sm:w-24 lg:h-28 lg:w-28",
+        className,
+      )}
       viewBox="0 0 966 966"
     >
       <path

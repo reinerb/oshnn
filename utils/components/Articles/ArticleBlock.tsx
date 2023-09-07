@@ -4,17 +4,21 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 
-interface ArticleBlockProps {
+type ArticleBlockProps = {
   title: string;
   publicationTitle: string;
   publicationDate: string;
   slug: string;
   paywall: boolean;
-}
+};
 
-function ArticleBlock(props: ArticleBlockProps) {
-  const { title, publicationTitle, slug, publicationDate, paywall } = props;
-
+function ArticleBlock({
+  title,
+  publicationTitle,
+  slug,
+  publicationDate,
+  paywall,
+}: ArticleBlockProps) {
   const renderedDate = dayjs(publicationDate).format("MM/DD/YYYY");
 
   return (

@@ -12,12 +12,13 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
 } from "next-share";
+import { twMerge } from "tailwind-merge";
 
-interface ShareButtonProps {
+type ShareButtonProps = {
   shareTo: "facebook" | "twitter" | "linkedin" | "email" | "clipboard";
   quote: string;
   className?: string;
-}
+};
 
 const icons = {
   facebook: faFacebookF,
@@ -27,10 +28,11 @@ const icons = {
   clipboard: faCopy,
 };
 
-function ShareButton(props: ShareButtonProps) {
-  const { shareTo, quote, className } = props;
-
-  const styles = `text-neutral-950 transition-colors duration-200 hover:text-neutral-700 dark:text-neutral-50 dark:hover:text-neutral-300 ${className}`;
+function ShareButton({ shareTo, quote, className }: ShareButtonProps) {
+  const styles = twMerge(
+    "text-neutral-950 transition-colors duration-200 hover:text-neutral-700 dark:text-neutral-50 dark:hover:text-neutral-300",
+    className,
+  );
 
   const icon = <FontAwesomeIcon icon={icons[shareTo]} className={styles} />;
 

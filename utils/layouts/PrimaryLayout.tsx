@@ -2,14 +2,12 @@ import React from "react";
 import Header from "../components/PrimaryLayout/Header";
 import Footer from "../components/PrimaryLayout/Footer";
 
-interface Props {
+type PrimaryLayoutProps = {
   children?: React.ReactNode;
   className?: string;
-}
+};
 
-function PrimaryLayout(props: Props) {
-  const { children, className } = props;
-
+function PrimaryLayout({ children, className }: PrimaryLayoutProps) {
   return (
     <div className="grid-rows-body grid min-h-screen">
       <Header />

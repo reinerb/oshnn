@@ -2,19 +2,15 @@ import { Category } from "@/utils/types/blog";
 import React from "react";
 import LinkButton from "../LinkButton";
 
-interface ArticleGridProps {
+type ArticleGridProps = {
   title: string;
   children: React.ReactNode;
   topic?: Category;
-}
+};
 
-function ArticleGrid(props: ArticleGridProps) {
-  const { title, children, topic } = props;
-
+function ArticleGrid({ title, children, topic }: ArticleGridProps) {
   return (
-    <section
-      className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4`}
-    >
+    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <h2 className="col-span-full text-center text-xl">{title}</h2>
       {children}
       {topic?.children && (
