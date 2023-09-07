@@ -11,7 +11,7 @@ module.exports = {
         body: "auto 1fr auto",
       },
       colors: {
-        primary: {
+        secondary: {
           50: "#f4f8fb",
           100: "#e7f0f7",
           200: "#cae0ed",
@@ -24,7 +24,7 @@ module.exports = {
           900: "#244256",
           950: "#182b39",
         },
-        secondary: {
+        primary: {
           50: "#f1f7fd",
           100: "#e0edf9",
           200: "#c7e0f6",

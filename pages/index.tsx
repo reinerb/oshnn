@@ -126,7 +126,7 @@ export default function Home({
         <title>OSHNN | Ocean State Health News Network</title>
       </Head>
       <PrimaryLayout className="flex flex-col gap-8">
-        <section className="text-secondary-900 dark:text-secondary-300 flex flex-col items-center gap-2">
+        <section className="text-primary-900 dark:text-primary-300 flex flex-col items-center gap-2">
           <h1 className="text-center text-2xl 2xl:text-3xl">
             Ocean State Health News Network
           </h1>
@@ -157,13 +157,15 @@ export default function Home({
           })}
         </ArticleGrid>
         <WaveDivider className="mx-auto my-2 max-w-sm" />
-        <section className="bg-secondary-800 dark:bg-secondary-200 flex max-w-fit flex-col items-center gap-2 self-center rounded-md px-8 py-4 text-neutral-50 dark:text-neutral-950">
+        <section className="bg-primary-800 dark:bg-primary-200 flex max-w-fit flex-col items-center gap-2 self-center rounded-md px-8 py-4 text-neutral-50 dark:text-neutral-950">
           <h2 className="text-xl">Subscribe</h2>
           <p>
             Sign up today and stay informed. Receive the latest curated
             healthcare news in your inbox on a biweekly basis.
           </p>
-          <LinkButton href="/newsletter">Subscribe</LinkButton>
+          <LinkButton href="/newsletter" inverted>
+            Subscribe
+          </LinkButton>
         </section>
         <SearchBar action={(query) => console.log(query)} />
       </PrimaryLayout>

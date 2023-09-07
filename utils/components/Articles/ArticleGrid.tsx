@@ -1,7 +1,6 @@
 import { Category } from "@/utils/types/blog";
 import React from "react";
 import LinkButton from "../LinkButton";
-import TopicButton from "./TopicButton";
 
 interface ArticleGridProps {
   title: string;
@@ -25,13 +24,13 @@ function ArticleGrid(props: ArticleGridProps) {
           </h3>
           <div className="flex flex-wrap justify-center gap-2">
             {topic.children.map((topic) => (
-              <TopicButton key={topic.id} href={`/topics/${topic.slug}`}>
+              <LinkButton small key={topic.id} href={`/topics/${topic.slug}`}>
                 {topic.title}
-              </TopicButton>
+              </LinkButton>
             ))}
-            <TopicButton inverted href={`topics/${topic.slug}`}>
+            <LinkButton small primary href={`topics/${topic.slug}`}>
               All {topic.title} Headlines
-            </TopicButton>
+            </LinkButton>
           </div>
         </div>
       )}
