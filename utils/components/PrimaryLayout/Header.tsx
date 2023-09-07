@@ -4,7 +4,11 @@ import React from "react";
 import PrimaryNav from "./PrimaryNav";
 import Logo from "../Logo";
 import Link from "next/link";
-import ColorModeSwitcher from "../ColorModeSwitcher";
+import dynamic from "next/dynamic";
+
+const ColorModeSwitcher = dynamic(() => import("../ColorModeSwitcher"), {
+  ssr: false,
+});
 
 function Header() {
   return (
