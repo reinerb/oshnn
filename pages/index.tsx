@@ -8,6 +8,7 @@ import LinkButton from "@/utils/components/LinkButton";
 import SearchBar from "@/utils/components/SearchBar";
 import type { Category } from "@/utils/types/blog";
 import type { RawCategory } from "@/utils/types/wordpressQueries";
+import WaveDivider from "@/utils/components/WaveDivider";
 
 type HomepageArticle = {
   id: number;
@@ -135,21 +136,25 @@ export default function Home({
             news from around the country and Rhode Island.
           </p>
         </section>
+        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <ArticleGrid title="Latest">
           {trending.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
+        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <ArticleGrid title="National" topic={topics.national}>
           {national.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
+        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <ArticleGrid title="Rhode Island" topic={topics.rhodeIsland}>
           {rhodeIsland.map(({ id, ...post }) => {
             return <ArticleBlock key={id} {...post} />;
           })}
         </ArticleGrid>
+        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <section className="flex flex-col items-center gap-2">
           <h2 className="text-xl">Subscribe to our newsletter</h2>
           <p>
@@ -158,6 +163,7 @@ export default function Home({
           </p>
           <LinkButton href="/newsletter">Subscribe</LinkButton>
         </section>
+        <WaveDivider className="mx-auto my-2 max-w-xl" />
         <SearchBar action={(query) => console.log(query)} />
       </PrimaryLayout>
     </>
