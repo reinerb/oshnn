@@ -6,9 +6,9 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
 
-type ColorModeSwitcherProps {
+type ColorModeSwitcherProps = {
   className?: string;
-}
+};
 
 function ColorModeSwitcher({ className }: ColorModeSwitcherProps) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -20,7 +20,10 @@ function ColorModeSwitcher({ className }: ColorModeSwitcherProps) {
   return (
     <FontAwesomeIcon
       icon={resolvedTheme === "dark" ? faMoon : faSun}
-      className={twMerge('cursor-pointer text-xl text-neutral-950 transition-colors duration-200 hover:text-neutral-800 dark:text-neutral-50 dark:hover:text-neutral-200', className)}
+      className={twMerge(
+        "cursor-pointer text-xl text-neutral-950 transition-colors duration-200 hover:text-neutral-800 dark:text-neutral-50 dark:hover:text-neutral-200",
+        className,
+      )}
       onClick={toggleTheme}
     />
   );
