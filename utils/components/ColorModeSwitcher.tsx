@@ -24,6 +24,7 @@ function ColorModeSwitcher({ className }: ColorModeSwitcherProps) {
         className,
       )}
       onClick={toggleTheme}
+      aria-label="toggle dark mode"
     >
       <FontAwesomeIcon icon={resolvedTheme === "dark" ? faMoon : faSun} />
     </button>
