@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useState } from "react";
+import Button from "./Button";
 
 type SearchBarProps = {
   initialQuery?: string;
@@ -26,12 +27,9 @@ const SearchBar = ({ action, initialQuery = "" }: SearchBarProps) => {
         placeholder="Search"
         className="rounded-md bg-neutral-200 px-4 py-2 outline-none placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-800 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700 sm:flex-1"
       />
-      <button
-        onClick={() => action(query)}
-        className="bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700 dark:hover:bg-secondary-400 dark:active:bg-secondary-300 rounded-md px-4 py-2 text-neutral-50 transition-colors duration-200"
-      >
+      <Button primary onClick={() => action(query)}>
         Search
-      </button>
+      </Button>
     </section>
   );
 };
