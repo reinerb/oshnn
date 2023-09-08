@@ -1,14 +1,11 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick: React.MouseEventHandler<HTMLButtonElement> | (() => void);
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   inverted?: boolean;
   primary?: boolean;
   small?: boolean;
-  className?: string;
-}
+};
 
 function Button({
   children,
