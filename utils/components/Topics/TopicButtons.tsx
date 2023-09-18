@@ -16,7 +16,7 @@ function TopicButtons({ topic, className }: TopicButtonsProps) {
           {topic.title}
         </LinkButton>
       ))}
-      <LinkButton small primary href={`topics/${topic.slug}`}>
+      <LinkButton small primary href={`/topics/${topic.slug}`}>
         All {topic.title} Headlines
       </LinkButton>
     </div>
