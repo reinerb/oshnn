@@ -13,6 +13,7 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   context,
 ) => {
   const topic: Category = await wpQueryHandler("categories", {
+    fields: ["count"],
     slug: context.params?.slug as string,
   }).then((res) => res[0]);
 
@@ -23,10 +24,7 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   const allTopics = await getTopics();
 
   // Get the total number of pages
-  const response = await fetch(
-    `${process.env.WORDPRESS_URL}/posts?per_page=${PER_PAGE}`,
-  );
-  const totalPages = await Number(response.headers.get("X-WP-TotalPages"));
+  const totalPages = Math.ceil(topic.count! / PER_PAGE);
 
   return { props: { topic, posts, allTopics, page, totalPages } };
 };
