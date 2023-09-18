@@ -4,13 +4,12 @@ import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleDollarToSlot } from "@fortawesome/free-solid-svg-icons";
+import dayjs from "dayjs";
+import dynamic from "next/dynamic";
+import LinkButton from "@/utils/components/LinkButton";
 import type { PostData } from "@/utils/types/wordpressQueries";
 import type { Category } from "@/utils/types/blog";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import dayjs from "dayjs";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import LinkButton from "@/utils/components/LinkButton";
 
 const ShareButtons = dynamic(
   () => import("@/utils/components/ShareButtons/ShareButtons"),
@@ -96,41 +95,37 @@ function Page({
   const truncatedTitle = title.substring(0, 30);
 
   return (
-    <>
-      <Head>
-        <title>
-          {`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
-        </title>
-        <meta name="description" content={content} />
-      </Head>
-      <PrimaryLayout className="flex flex-col gap-4">
-        <article className="flex flex-col gap-2">
-          <h1 className="text-2xl">{title}</h1>
-          <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
-            <span>{publicationTitle}</span>
-            <span className="sm:pl-4">{articleAuthors}</span>
-            <span className="sm:pl-4">{renderedDate}</span>
-          </div>
-          <section dangerouslySetInnerHTML={{ __html: content }} />
-          <LinkButton
-            target="_blank"
-            rel="noreferrer noopener"
-            href={articleUrl}
-            className="block self-center"
-          >
-            Read more at {publicationTitle}{" "}
-            {paywall && (
-              <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-2" />
-            )}
-          </LinkButton>
-          <div>Topics: {categoryLinks}</div>
-        </article>
-        <ShareButtons callToAction="Share This Article" quote={title} />
-        <section>
-          <h2 className="text-xl">Related posts</h2>
-        </section>
-      </PrimaryLayout>
-    </>
+    <PrimaryLayout
+      title={`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
+      meta={content}
+      className="flex flex-col gap-4"
+    >
+      <article className="flex flex-col gap-2">
+        <h1 className="text-2xl">{title}</h1>
+        <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
+          <span>{publicationTitle}</span>
+          <span className="sm:pl-4">{articleAuthors}</span>
+          <span className="sm:pl-4">{renderedDate}</span>
+        </div>
+        <section dangerouslySetInnerHTML={{ __html: content }} />
+        <LinkButton
+          target="_blank"
+          rel="noreferrer noopener"
+          href={articleUrl}
+          className="block self-center"
+        >
+          Read more at {publicationTitle}{" "}
+          {paywall && (
+            <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-2" />
+          )}
+        </LinkButton>
+        <div>Topics: {categoryLinks}</div>
+      </article>
+      <ShareButtons callToAction="Share This Article" quote={title} />
+      <section>
+        <h2 className="text-xl">Related posts</h2>
+      </section>
+    </PrimaryLayout>
   );
 }
 

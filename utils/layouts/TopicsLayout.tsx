@@ -26,6 +26,12 @@ function TopicsLayout({
 
   return (
     <PrimaryLayout
+      title={
+        topic ? `${topic.title} Headlines | OSHNN` : "All Headlines | OSHNN"
+      }
+      meta={`The latest curated headlines about ${
+        topic ? `${topic.title}.` : "healthcare."
+      }`}
       className={twMerge(
         "grid-rows-search-bottom grid gap-4 lg:grid-cols-3 xl:grid-cols-4",
         className,
