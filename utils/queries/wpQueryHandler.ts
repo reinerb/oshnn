@@ -123,7 +123,5 @@ async function postPageQueryHandler(
     }
   }
 
-  console.log(queryData.map((item) => item.id));
-
   return queryData;
 }
