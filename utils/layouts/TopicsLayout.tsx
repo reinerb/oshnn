@@ -38,7 +38,6 @@ function TopicsLayout({
         {posts.map((post) => (
           <ArticleBlock {...post} key={post.id} />
         ))}
-        <div className="col-span-full flex"></div>
         {(hasNextPage || hasPreviousPage) && (
           <div
             className={twMerge(
