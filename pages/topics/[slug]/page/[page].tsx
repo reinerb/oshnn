@@ -5,12 +5,17 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
 import { Category } from "@/utils/types/blog";
+import TopicsLayout from "@/utils/layouts/TopicsLayout";
 
 const PER_PAGE = 12;
 
 export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   context,
 ) => {
+  const topic: Category = await wpQueryHandler("categories", {
+    slug: context.params?.slug as string,
+  }).then((res) => res[0]);
+
   const page = Number(context.params?.page);
 
   // Get the relevant posts and all topics
@@ -23,7 +28,7 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   );
   const totalPages = await Number(response.headers.get("X-WP-TotalPages"));
 
-  return { props: { posts, allTopics, page, totalPages } };
+  return { props: { topic, posts, allTopics, page, totalPages } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,14 +50,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-function TopicPage({ allTopics, posts, page, totalPages }: BlockPageProps) {
-  return (
-    <PrimaryLayout>
-      {posts.map((post) => (
-        <h1>{post.title}</h1>
-      ))}
-    </PrimaryLayout>
-  );
+function TopicPage(props: BlockPageProps) {
+  return <TopicsLayout {...props} />;
 }
 
 export default TopicPage;

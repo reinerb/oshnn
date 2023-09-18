@@ -1,8 +1,8 @@
 import React from "react";
-import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import type { BlockPageProps } from "@/utils/types/BlogPages";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
+import TopicsLayout from "@/utils/layouts/TopicsLayout";
 
 const PER_PAGE = 12;
 
@@ -38,14 +38,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-function TopicPage({ allTopics, posts, page, totalPages }: BlockPageProps) {
-  return (
-    <PrimaryLayout>
-      {posts.map((post) => (
-        <h1>{post.title}</h1>
-      ))}
-    </PrimaryLayout>
-  );
+function TopicPage(props: BlockPageProps) {
+  return <TopicsLayout {...props} />;
 }
 
 export default TopicPage;
