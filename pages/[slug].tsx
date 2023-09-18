@@ -2,7 +2,6 @@ import React from "react";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import type { Page } from "@/utils/types/blog";
 
 interface CMSPageProps {
   title: string;
