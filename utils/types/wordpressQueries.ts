@@ -4,6 +4,8 @@ export type WordPressQueryParams = {
   fields?: WordPressField[];
   slug?: string;
   id?: number;
+  page?: number;
+  perPage?: number;
 };
 
 export type WordPressResponse = {

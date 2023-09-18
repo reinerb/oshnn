@@ -3,9 +3,17 @@ import type { BlockArticle, Topics } from "../types/BlogPages";
 import type { Category } from "../types/blog";
 import type { RawCategory } from "../types/wordpressQueries";
 
-export const getPosts = async (): Promise<BlockArticle[]> => {
+type GetPostsParams = {
+  page?: number;
+  perPage?: number;
+};
+
+export const getPosts = async (
+  params?: GetPostsParams,
+): Promise<BlockArticle[]> => {
   const postsQuery = await wpQueryHandler("posts", {
     fields: ["acf", "date", "categories"],
+    ...params,
   });
 
   return postsQuery.map(({ acf, ...post }) => {
