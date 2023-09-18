@@ -2,13 +2,19 @@
 
 import React, { ChangeEvent, useState } from "react";
 import Button from "./Button";
+import { twMerge } from "tailwind-merge";
 
 type SearchBarProps = {
   initialQuery?: string;
   action: (query: string) => void;
+  className?: string;
 };
 
-const SearchBar = ({ action, initialQuery = "" }: SearchBarProps) => {
+const SearchBar = ({
+  action,
+  initialQuery = "",
+  className,
+}: SearchBarProps) => {
   const [query, setQuery] = useState(initialQuery);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +22,7 @@ const SearchBar = ({ action, initialQuery = "" }: SearchBarProps) => {
   };
 
   return (
-    <section className="flex flex-col gap-2 sm:flex-row">
+    <section className={twMerge("flex flex-col gap-2 sm:flex-row", className)}>
       <label htmlFor="search" className="sr-only">
         Search
       </label>
