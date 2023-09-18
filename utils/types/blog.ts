@@ -26,4 +26,5 @@ export type ArticlePost = Post & {
 export type Category = BaseData & {
   description?: string;
   children?: Category[];
+  count?: number;
 };
