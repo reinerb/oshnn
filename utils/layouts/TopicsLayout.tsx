@@ -50,7 +50,7 @@ function TopicsLayout({
           >
             {hasPreviousPage && (
               <Link href={`/topics/page/${page - 1}`}>
-                Previous <FontAwesomeIcon icon={faAngleLeft} />
+                <FontAwesomeIcon icon={faAngleLeft} /> Previous
               </Link>
             )}
             {hasNextPage && (
