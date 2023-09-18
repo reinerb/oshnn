@@ -1,8 +1,8 @@
 import React from "react";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
-import type { TopicPageProps } from "@/utils/types/TopicPages";
+import type { BlockPageProps } from "@/utils/types/BlogPages";
 
-function TopicPage({ topic, allTopics, posts }: TopicPageProps) {
+function TopicPage({ topic, allTopics, posts }: BlockPageProps) {
   return <PrimaryLayout></PrimaryLayout>;
 }
 

@@ -16,7 +16,7 @@ export type Topics = {
 };
 
 export type BlockPageProps = {
-  topic: Category;
+  topic?: Category;
   allTopics: Topics;
   posts: BlockArticle[];
 };
