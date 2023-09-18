@@ -26,9 +26,13 @@ function TopicsLayout({
   const hasPreviousPage = page && page > 1;
 
   return (
-    <PrimaryLayout className="grid auto-rows-max gap-4 lg:grid-cols-3">
+    <PrimaryLayout
+      className={twMerge("grid auto-rows-max gap-4 lg:grid-cols-3", className)}
+    >
       <section className="grid auto-rows-max grid-cols-1 gap-4 lg:col-span-2 xl:grid-cols-2">
-        <h1 className="col-span-full text-2xl">Articles</h1>
+        <h1 className="col-span-full text-2xl">
+          {topic ? topic.title : "Articles"}
+        </h1>
         {posts.map((post) => (
           <ArticleBlock {...post} key={post.id} />
         ))}
