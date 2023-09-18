@@ -95,9 +95,12 @@ async function postPageQueryHandler(
   const idString = params?.id ? `&id=${params.id}` : "";
   const pageString = params?.page ? `&page=${params.page}` : "";
   const perPageString = params?.perPage ? `&per_page=${params.perPage}` : "";
+  const categoryIdString = params?.categoryId
+    ? `&categories=${params.categoryId}`
+    : "";
 
   // Construct the URL
-  const url = `${WP_URL}/wp-json/wp/v2/${type}?_fields=id,title,slug${fieldString}${slugString}${idString}${pageString}${perPageString}`;
+  const url = `${WP_URL}/wp-json/wp/v2/${type}?_fields=id,title,slug${fieldString}${slugString}${idString}${pageString}${perPageString}${categoryIdString}`;
 
   // Fetch from that URL
   const response = await fetch(url, { method: "GET" });

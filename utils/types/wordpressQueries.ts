@@ -6,6 +6,7 @@ export type WordPressQueryParams = {
   id?: number;
   page?: number;
   perPage?: number;
+  categoryId?: number;
 };
 
 export type WordPressResponse = {
