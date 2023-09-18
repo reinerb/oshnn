@@ -1,6 +1,5 @@
 import React from "react";
 import PrimaryLayout from "./PrimaryLayout";
-import { Category } from "../types/blog";
 import { BlockPageProps } from "../types/BlogPages";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
