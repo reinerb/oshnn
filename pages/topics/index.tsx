@@ -4,8 +4,10 @@ import type { BlockPageProps } from "@/utils/types/BlogPages";
 import type { GetStaticProps } from "next";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 
+const PER_PAGE = 12;
+
 export const getStaticProps: GetStaticProps<BlockPageProps> = async () => {
-  const posts = await getPosts({ page: 1, perPage: 5 });
+  const posts = await getPosts({ page: 1, perPage: PER_PAGE });
   const topics = await getTopics();
 
   return { props: { posts, allTopics: topics } };
