@@ -110,8 +110,6 @@ async function postPageQueryHandler(
     // Determine how many pages there are and save this page of the response
     const pagination = await Number(response.headers.get("X-WP-TotalPages"));
 
-    console.log(queryData.map((item) => item.id));
-
     // Fetch all pages
     if (pagination > 1) {
       for (let i = 2; i <= pagination; i++) {
