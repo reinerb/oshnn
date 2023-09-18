@@ -1,6 +1,7 @@
 import { Category } from "@/utils/types/blog";
 import React from "react";
 import LinkButton from "../LinkButton";
+import TopicButtons from "../Topics/TopicButtons";
 
 type ArticleGridProps = {
   title: string;
@@ -18,16 +19,7 @@ function ArticleGrid({ title, children, topic }: ArticleGridProps) {
           <h3 className="col-span-full text-center text-lg">
             {topic.title} Topics
           </h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            {topic.children.map((topic) => (
-              <LinkButton small key={topic.id} href={`/topics/${topic.slug}`}>
-                {topic.title}
-              </LinkButton>
-            ))}
-            <LinkButton small primary href={`topics/${topic.slug}`}>
-              All {topic.title} Headlines
-            </LinkButton>
-          </div>
+          {topic && <TopicButtons topic={topic} />}
         </div>
       )}
     </section>
