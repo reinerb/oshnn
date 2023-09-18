@@ -67,12 +67,20 @@
   }
 
   a {
-    @apply text-primary-700 dark:text-primary-300 hover:text-primary-800 active:text-primary-900 dark:hover:text-primary-200 dark:active:text-primary-100 transition-colors duration-200;
+    @apply text-primary-700 transition-colors duration-200 hover:text-primary-800 active:text-primary-900 dark:text-primary-300 dark:hover:text-primary-200 dark:active:text-primary-100;
   }
 }
 
 @layer components {
   header a {
     @apply text-neutral-950 transition-colors duration-200 hover:text-neutral-800 active:text-neutral-700 dark:text-neutral-50 dark:hover:text-neutral-200 dark:active:text-neutral-300;
+  }
+
+  .cms-page h2 {
+    @apply mb-1 text-xl;
+  }
+
+  .cms-page p + h2 {
+    @apply mt-2 lg:mt-4;
   }
 }

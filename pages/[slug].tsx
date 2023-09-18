@@ -29,8 +29,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 function CMSPage({ title, content }: CMSPageProps) {
   return (
-    <PrimaryLayout title={title}>
-      <h1 className="text-2xl">{title}</h1>
+    <PrimaryLayout title={title} className="cms-page">
+      <h1 className="mb-2 text-2xl lg:mb-4">{title}</h1>
       <article dangerouslySetInnerHTML={{ __html: content }} />
     </PrimaryLayout>
   );
