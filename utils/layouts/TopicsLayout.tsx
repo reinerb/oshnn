@@ -26,9 +26,12 @@ function TopicsLayout({
 
   return (
     <PrimaryLayout
-      className={twMerge("grid auto-rows-max gap-4 lg:grid-cols-3", className)}
+      className={twMerge(
+        "grid-rows-search-bottom grid gap-4 lg:grid-cols-3 xl:grid-cols-4",
+        className,
+      )}
     >
-      <section className="grid auto-rows-max grid-cols-1 gap-4 lg:col-span-2 xl:grid-cols-2">
+      <section className="grid auto-rows-max grid-cols-1 gap-4 lg:col-span-2 xl:col-span-3 xl:grid-cols-2">
         <h1 className="col-span-full text-2xl">
           {topic ? topic.title : "Articles"}
         </h1>

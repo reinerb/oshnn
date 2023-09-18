@@ -12,6 +12,7 @@ module.exports = {
       },
       gridTemplateRows: {
         body: "auto 1fr auto",
+        "search-bottom": "1fr auto",
       },
       colors: {
         secondary: {
