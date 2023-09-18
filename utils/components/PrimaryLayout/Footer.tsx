@@ -9,12 +9,12 @@ function Footer() {
       <p>
         Copyright <FontAwesomeIcon icon={faCopyright} /> 2023 OSHNN
       </p>
-      <Link href="/privacy" className="md:pl-2 xl:pl-4">
-        Privacy Policy
-      </Link>
-      <Link href="/disclaimer" className="md:pl-2 xl:pl-4">
-        Disclaimer
-      </Link>
+      <p className="md:pl-2 xl:pl-4">
+        <Link href="/privacy">Privacy Policy</Link>
+      </p>
+      <p className="md:pl-2 xl:pl-4">
+        <Link href="/disclaimer">Disclaimer</Link>
+      </p>
       <p className="md:pl-2 xl:pl-4">
         Site by{" "}
         <Link href="https://masscommunications.co/">
