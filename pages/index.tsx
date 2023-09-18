@@ -1,6 +1,5 @@
 import Head from "next/head";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
-import { wpQueryHandler } from "@/utils/queries/wpQueryHandler";
 import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
 import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
@@ -8,8 +7,6 @@ import LinkButton from "@/utils/components/LinkButton";
 import SearchBar from "@/utils/components/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
-import type { Category } from "@/utils/types/blog";
-import type { RawCategory } from "@/utils/types/wordpressQueries";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
 
 type HomepageProps = {

@@ -1,6 +1,6 @@
 import { Category } from "./blog";
 
-export type TopicPageArticle = {
+export type BlockArticle = {
   id: number;
   slug: string;
   title: string;
@@ -15,8 +15,8 @@ export type Topics = {
   rhodeIsland: Category;
 };
 
-export type TopicPageProps = {
+export type BlockPageProps = {
   topic: Category;
   allTopics: Topics;
-  posts: TopicPageArticle[];
+  posts: BlockArticle[];
 };
