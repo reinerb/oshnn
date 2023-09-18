@@ -23,6 +23,7 @@ export type WordPressResponse = {
   acf?: ACFData;
   date?: string;
   parent?: number;
+  count?: number;
 };
 
 export type CategoryResponse = {
@@ -30,6 +31,7 @@ export type CategoryResponse = {
   name: string;
   slug: string;
   parent?: number;
+  count?: number;
 };
 
 export type RawCategory = {
@@ -59,7 +61,13 @@ export type PostData = {
   acf: ACFData;
 };
 
-type WordPressField = "content" | "categories" | "acf" | "date" | "parent";
+type WordPressField =
+  | "content"
+  | "categories"
+  | "acf"
+  | "date"
+  | "parent"
+  | "count";
 
 type ACFData = {
   articleUrl: string;
