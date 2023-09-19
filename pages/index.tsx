@@ -56,9 +56,11 @@ export default function Home({
           Ocean State Health News Network
         </h1>
         <p className="max-w-6xl text-center">
-          OSHNN navigates the intricate landscape of medical advancements and
-          wellness insights to bring you the latest developments in healthcare
-          news from around Rhode Island and the rest of the country.
+          The volume of healthcare news and information can be overwhelming.
+          OSHNN navigates this information superhighway for you. OSHNN
+          highlights articles of interest to provide you with insight and
+          knowledge. OSHNN chronicles healthcare news from around the country
+          and specific to the Ocean State. OSHNN is the pulse of healthcare.
         </p>
       </section>
 
