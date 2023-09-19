@@ -34,15 +34,14 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const topics: Category[] = await wpQueryHandler("categories");
+  const topics: Category[] = await wpQueryHandler("categories", {
+    fields: ["count"],
+  });
 
   let paths: { params: { slug: string; page: string } }[] = [];
 
   for (let topic of topics) {
-    const response = await fetch(
-      `${process.env.WORDPRESS_URL}/posts?per_page=${PER_PAGE}&category=${topic.id}`,
-    );
-    const pagination = await Number(response.headers.get("X-WP-TotalPages"));
+    let pagination = Math.ceil(topic.count! / PER_PAGE);
 
     for (let i = 1; i <= pagination; i++) {
       paths = [...paths, { params: { slug: topic.slug, page: i.toString() } }];
