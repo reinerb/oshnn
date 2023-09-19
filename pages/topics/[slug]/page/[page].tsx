@@ -19,8 +19,12 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
 
   const page = Number(context.params?.page);
 
-  // Get the relevant posts and all topics
-  const posts = await getPosts({ page, perPage: PER_PAGE });
+  // Get the relevant posts
+  const posts = await getPosts({
+    page,
+    perPage: PER_PAGE,
+    categoryIds: [topic.id],
+  });
   const allTopics = await getTopics();
 
   // Get the total number of pages

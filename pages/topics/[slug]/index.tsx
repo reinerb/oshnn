@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   const posts = await getPosts({
     page: 1,
     perPage: PER_PAGE,
-    categoryId: topic.id,
+    categoryIds: [topic.id],
   });
   const allTopics = await getTopics();
 
