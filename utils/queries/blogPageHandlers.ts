@@ -6,7 +6,7 @@ import type { RawCategory } from "../types/wordpressQueries";
 type GetPostsParams = {
   page?: number;
   perPage?: number;
-  categoryId?: number;
+  categoryIds?: number[];
 };
 
 export const getPosts = async (

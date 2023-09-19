@@ -95,8 +95,8 @@ async function postPageQueryHandler(
   const idString = params?.id ? `&id=${params.id}` : "";
   const pageString = params?.page ? `&page=${params.page}` : "";
   const perPageString = params?.perPage ? `&per_page=${params.perPage}` : "";
-  const categoryIdString = params?.categoryId
-    ? `&categories=${params.categoryId}`
+  const categoryIdString = params?.categoryIds
+    ? `&categories=${params.categoryIds.join(",")}`
     : "";
 
   // Construct the URL
