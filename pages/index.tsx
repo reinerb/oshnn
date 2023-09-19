@@ -16,16 +16,23 @@ type HomepageProps = {
 };
 
 export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
-  const posts = await getPosts();
+  // Get all topics
   const topics = await getTopics();
 
-  const trending = posts.slice(0, 6);
-  const national = posts
-    .filter((post) => post.categories.includes(topics.national.id))
-    .slice(0, 5);
-  const rhodeIsland = posts
-    .filter((post) => post.categories.includes(topics.rhodeIsland.id))
-    .slice(0, 5);
+  // Get trending posts x6
+  const trending = await getPosts({ page: 1, perPage: 6 });
+
+  // Get national and Rhode Island posts x5 each
+  const national = await getPosts({
+    page: 1,
+    perPage: 5,
+    categoryIds: [topics.national.id],
+  });
+  const rhodeIsland = await getPosts({
+    page: 1,
+    perPage: 5,
+    categoryIds: [topics.rhodeIsland.id],
+  });
 
   return { props: { trending, national, rhodeIsland, topics } };
 };
@@ -54,12 +61,15 @@ export default function Home({
           news from around Rhode Island and the rest of the country.
         </p>
       </section>
+
       <ArticleGrid title="Trending in Healthcare">
         {trending.map(({ id, ...post }) => {
           return <ArticleBlock key={id} {...post} />;
         })}
       </ArticleGrid>
+
       <WaveDivider className="mx-auto my-2 max-w-sm" />
+
       <ArticleGrid
         title="Rhode Island Healthcare Headlines"
         topic={topics.rhodeIsland}
@@ -68,13 +78,17 @@ export default function Home({
           return <ArticleBlock key={id} {...post} />;
         })}
       </ArticleGrid>
+
       <WaveDivider className="mx-auto my-2 max-w-sm" />
+
       <ArticleGrid title="US Healthcare Headlines" topic={topics.national}>
         {national.map(({ id, ...post }) => {
           return <ArticleBlock key={id} {...post} />;
         })}
       </ArticleGrid>
+
       <WaveDivider className="mx-auto my-2 max-w-sm" />
+
       <section className="flex max-w-fit flex-col items-center gap-2 self-center rounded-md bg-primary-900 px-8 py-4 text-neutral-50 dark:bg-primary-100 dark:text-neutral-950">
         <h2 className="text-xl">Subscribe</h2>
         <p>
@@ -85,6 +99,7 @@ export default function Home({
           Subscribe
         </LinkButton>
       </section>
+
       <SearchBar action={(query) => console.log(query)} />
     </PrimaryLayout>
   );
