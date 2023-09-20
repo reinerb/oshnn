@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Button from "./Button";
+import { useReCaptcha } from "next-recaptcha-v3";
 
 type NewsletterFormProps = {
   className?: string;
@@ -18,6 +19,11 @@ type NewsletterFormData = {
   phone?: string;
   jobTitle?: string;
   company?: string;
+};
+
+type SubmissionError = {
+  tripped: boolean;
+  message: string;
 };
 
 const schema = Yup.object({
@@ -45,9 +51,46 @@ function NewsletterForm({ className }: NewsletterFormProps) {
     mode: "onTouched",
     resolver: yupResolver(schema),
   });
+  const { executeRecaptcha } = useReCaptcha();
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [submissionError, setSubmissionError] = useState<SubmissionError>({
+    tripped: false,
+    message: "",
+  });
 
-  const onSubmit: SubmitHandler<NewsletterFormData> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<NewsletterFormData> = async (formData) => {
+    if (!executeRecaptcha) {
+      setSubmissionError({
+        tripped: true,
+        message: "executeRecaptcha not initialized",
+      });
+      return;
+    }
+
+    const token = await executeRecaptcha("onSubmit");
+
+    const formSubmission = { formData, token };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(formSubmission),
+      }).then((res) => res.json());
+
+      response.success
+        ? setSubmitted(true)
+        : setSubmissionError({
+            tripped: true,
+            message: response.message,
+          });
+    } catch (e) {
+      if (typeof e === "string") {
+        setSubmissionError({ tripped: true, message: e });
+      } else if (e instanceof Error) {
+        setSubmissionError({ tripped: true, message: e.message });
+      }
+    }
+  };
 
   return (
     <form
