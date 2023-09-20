@@ -104,11 +104,18 @@ function ContactForm({ className }: ContactFormProps) {
 
       <div className="grid w-full md:col-span-2">
         <Button
+          disabled={isSubmitting}
           primary
           type="submit"
-          className="w-full md:w-fit md:place-self-end"
+          className="w-full md:w-24 md:place-self-end"
         >
-          Submit
+          {isSubmitting ? (
+            <div className="mx-auto h-6 w-6 animate-spin rounded-full border-4 border-primary-200 !border-t-transparent dark:border-primary-800">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
+            "Submit"
+          )}
         </Button>
       </div>
     </form>

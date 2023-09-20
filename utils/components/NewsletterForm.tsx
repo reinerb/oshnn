@@ -24,11 +24,16 @@ const schema = Yup.object({
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
-  phone: Yup.string()
-    .matches(/^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, {
-      message: "Invalid phone number",
-    })
-    .optional(),
+  phone: Yup.lazy((value) =>
+    value === ""
+      ? Yup.string()
+      : Yup.string().matches(
+          /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+          {
+            message: "Invalid phone number",
+          },
+        ),
+  ),
 });
 
 function NewsletterForm({ className }: NewsletterFormProps) {
@@ -50,17 +55,17 @@ function NewsletterForm({ className }: NewsletterFormProps) {
       className={twMerge("grid grid-cols-1 gap-4 md:grid-cols-2", className)}
     >
       <div className="grid w-full grid-cols-2">
-        <label htmlFor="name">First Name*</label>
+        <label htmlFor="firstName">First Name*</label>
         {errors.firstName && (
           <label
-            htmlFor="name"
+            htmlFor="firstName"
             className="place-self-end font-bold text-red-700 dark:text-red-300"
           >
             {errors.firstName.message}
           </label>
         )}
         <input
-          id="name"
+          id="firstName"
           type="text"
           placeholder="Nomen"
           className={twMerge(
@@ -183,11 +188,18 @@ function NewsletterForm({ className }: NewsletterFormProps) {
 
       <div className="grid w-full md:col-span-2">
         <Button
+          disabled={isSubmitting}
           primary
           type="submit"
-          className="w-full md:w-fit md:place-self-end"
+          className="w-full md:w-24 md:place-self-end"
         >
-          Submit
+          {isSubmitting ? (
+            <div className="mx-auto h-6 w-6 animate-spin rounded-full border-4 border-primary-200 !border-t-transparent dark:border-primary-800">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
+            "Submit"
+          )}
         </Button>
       </div>
     </form>
