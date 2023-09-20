@@ -28,6 +28,7 @@ const SearchBar = ({
       </label>
       <input
         name="search"
+        id="search"
         value={query}
         onChange={handleChange}
         placeholder="Search"
