@@ -22,11 +22,23 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
     perPage: PER_PAGE,
     categoryIds: [topic.id],
   });
+
+  // If there are no posts, this route was not found
+  if (!posts) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Get a list of every topic
   const allTopics = await getTopics();
 
   const totalPages = Math.ceil(topic.count! / PER_PAGE);
 
-  return { props: { topic, posts, allTopics, totalPages } };
+  return {
+    props: { topic, posts, allTopics, totalPages },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -42,7 +54,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 

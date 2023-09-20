@@ -13,6 +13,15 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
 
   // Get the relevant posts and all topics
   const posts = await getPosts({ page, perPage: PER_PAGE });
+
+  // If there are no posts, this route was not found
+  if (!posts) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Get a list of every topic
   const allTopics = await getTopics();
 
   // Get the total number of pages
@@ -21,7 +30,10 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async (
   );
   const totalPages = await Number(response.headers.get("X-WP-TotalPages"));
 
-  return { props: { posts, allTopics, page, totalPages } };
+  return {
+    props: { posts, allTopics, page, totalPages },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -35,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths = [...paths, { params: { page: i.toString() } }];
   }
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 function TopicPage(props: BlockPageProps) {

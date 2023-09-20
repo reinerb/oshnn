@@ -34,7 +34,10 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
     categoryIds: [topics.rhodeIsland.id],
   });
 
-  return { props: { trending, national, rhodeIsland, topics } };
+  return {
+    props: { trending, national, rhodeIsland, topics },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 export default function Home({

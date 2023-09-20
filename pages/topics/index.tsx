@@ -16,7 +16,10 @@ export const getStaticProps: GetStaticProps<BlockPageProps> = async () => {
   );
   const totalPages = await Number(response.headers.get("X-WP-TotalPages"));
 
-  return { props: { posts, allTopics, totalPages } };
+  return {
+    props: { posts, allTopics, totalPages },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 function TopicPage(props: BlockPageProps) {
