@@ -6,24 +6,24 @@ import { searchHandler } from "@/utils/queries/searchHandler";
 import { BlockArticle } from "@/utils/types/BlogPages";
 import ArticleBlock from "../Articles/ArticleBlock";
 import ArticleGrid from "../Articles/ArticleGrid";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 type SearchResultsProps = {
   searchString: any;
-  startPage: number;
+  page: number;
   className?: string;
 };
 
 const PER_PAGE = 12;
 
-function SearchResults({
-  searchString,
-  startPage,
-  className,
-}: SearchResultsProps) {
-  const [page, setPage] = useState(startPage);
+function SearchResults({ searchString, page, className }: SearchResultsProps) {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<BlockArticle[]>([]);
   const [pages, setPages] = useState(0);
+
+  const articleBlocks = posts.map((post) => <ArticleBlock {...post} />);
 
   useEffect(() => {
     if (!searchString) {
@@ -57,7 +57,26 @@ function SearchResults({
           <div className="sr-only motion-reduce:not-sr-only">Loading...</div>
         </div>
       ) : posts.length > 0 ? (
-        posts.map((post) => <ArticleBlock {...post} />)
+        <>
+          {articleBlocks}
+          {(page > 1 || page < pages) && (
+            <div className="col-span-full grid">
+              {page > 1 && (
+                <Link href={`/search?search=${searchString}&page=${page - 1}`}>
+                  <FontAwesomeIcon icon={faAngleLeft} /> Previous
+                </Link>
+              )}
+              {page < pages && (
+                <Link
+                  href={`/search?search=${searchString}&page=${page + 1}`}
+                  className="justify-self-end"
+                >
+                  Next <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              )}
+            </div>
+          )}
+        </>
       ) : searchString ? (
         <p>
           Sorry, we didn't find any results. Please try another search term.
