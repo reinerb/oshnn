@@ -84,10 +84,7 @@ function TopicsLayout({
           />
         </div>
       </nav>
-      <SearchBar
-        action={(query) => console.log(query)}
-        className="col-span-full"
-      />
+      <SearchBar className="col-span-full" />
     </PrimaryLayout>
   );
 }
