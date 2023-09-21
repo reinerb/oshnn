@@ -32,6 +32,7 @@ export async function wpQueryHandler(
     let data = {
       ...element,
       content: element.content?.rendered,
+      excerpt: element.excerpt?.rendered,
       title: decode(element.title.rendered),
     };
 
@@ -92,7 +93,10 @@ async function postPageQueryHandler(
   // join all of the elements with commas
   const fieldString = params?.fields ? `,${params.fields.join(",")}` : "";
   const slugString = params?.slug ? `&slug=${params.slug}` : "";
-  const idString = params?.id ? `&id=${params.id}` : "";
+  const idString = params?.id ? `&include=${params.id}` : "";
+  const searchString = params?.search
+    ? `&search=${encodeURIComponent(params.search)}`
+    : "";
   const pageString = params?.page ? `&page=${params.page}` : "";
   const perPageString = params?.perPage ? `&per_page=${params.perPage}` : "";
   const categoryIdString = params?.categoryIds
@@ -100,7 +104,15 @@ async function postPageQueryHandler(
     : "";
 
   // Construct the URL
-  const url = `${WP_URL}/wp-json/wp/v2/${type}?_fields=id,title,slug${fieldString}${slugString}${idString}${pageString}${perPageString}${categoryIdString}`;
+  const url = `${WP_URL}/wp-json/wp/v2/${type}?_fields=id,title,slug
+    ${fieldString}
+    ${slugString}
+    ${idString}
+    ${searchString}
+    ${pageString}
+    ${perPageString}
+    ${categoryIdString}
+  `;
 
   // Fetch from that URL
   const response = await fetch(url, { method: "GET" });
