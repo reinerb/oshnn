@@ -3,7 +3,7 @@ import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
 import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
 import LinkButton from "@/utils/components/LinkButton";
-import SearchBar from "@/utils/components/SearchBar";
+import SearchBar from "@/utils/components/Search/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
@@ -34,7 +34,10 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
     categoryIds: [topics.rhodeIsland.id],
   });
 
-  return { props: { trending, national, rhodeIsland, topics } };
+  return {
+    props: { trending, national, rhodeIsland, topics },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 export default function Home({
@@ -102,7 +105,7 @@ export default function Home({
         </LinkButton>
       </section>
 
-      <SearchBar action={(query) => console.log(query)} />
+      <SearchBar />
     </PrimaryLayout>
   );
 }

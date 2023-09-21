@@ -6,7 +6,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import ArticleBlock from "../components/Articles/ArticleBlock";
 import { twMerge } from "tailwind-merge";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/Search/SearchBar";
 import TopicButtons from "../components/Topics/TopicButtons";
 
 type TopicsLayoutProps = BlockPageProps & {
@@ -33,7 +33,7 @@ function TopicsLayout({
         topic ? `${topic.title}.` : "healthcare."
       }`}
       className={twMerge(
-        "grid-rows-search-bottom grid gap-4 lg:grid-cols-3 xl:grid-cols-4",
+        "grid grid-rows-search-bottom gap-4 lg:grid-cols-3 xl:grid-cols-4",
         className,
       )}
     >
@@ -84,10 +84,7 @@ function TopicsLayout({
           />
         </div>
       </nav>
-      <SearchBar
-        action={(query) => console.log(query)}
-        className="col-span-full"
-      />
+      <SearchBar className="col-span-full" />
     </PrimaryLayout>
   );
 }

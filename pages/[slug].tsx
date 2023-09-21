@@ -14,7 +14,16 @@ export const getStaticProps: GetStaticProps<CMSPageProps> = async (context) => {
     slug: context.params?.slug as string,
   }).then((res) => res[0]);
 
-  return { props: { title: query.title, content: query.content! } };
+  if (!query) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { title: query.title, content: query.content! },
+    revalidate: 300, // Revalidate every 5 minutes
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -24,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { slug: page.slug } };
   });
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 function CMSPage({ title, content }: CMSPageProps) {

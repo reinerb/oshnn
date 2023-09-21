@@ -4,6 +4,7 @@ export type WordPressQueryParams = {
   fields?: WordPressField[];
   slug?: string;
   id?: number;
+  search?: string;
   page?: number;
   perPage?: number;
   categoryIds?: number[];
@@ -16,6 +17,10 @@ export type WordPressResponse = {
   };
   slug: string;
   content?: {
+    rendered: string;
+    protected: boolean;
+  };
+  excerpt?: {
     rendered: string;
     protected: boolean;
   };
@@ -46,6 +51,7 @@ export type WordPressData = {
   title: string;
   slug: string;
   content?: string;
+  excerpt?: string;
   categories?: number[];
   acf?: ACFData;
   date?: string;
@@ -67,7 +73,8 @@ type WordPressField =
   | "acf"
   | "date"
   | "parent"
-  | "count";
+  | "count"
+  | "excerpt";
 
 type ACFData = {
   articleUrl: string;
