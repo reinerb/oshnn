@@ -56,9 +56,14 @@ function ContactForm({ className }: ContactFormProps) {
 
     const formSubmission = { formData, token };
 
+    console.log(formSubmission);
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formSubmission),
       }).then((res) => res.json());
 
@@ -70,8 +75,10 @@ function ContactForm({ className }: ContactFormProps) {
           });
     } catch (e) {
       if (typeof e === "string") {
+        console.error(e);
         setSubmissionError({ tripped: true, message: e });
       } else if (e instanceof Error) {
+        console.error(e.message);
         setSubmissionError({ tripped: true, message: e.message });
       }
     }

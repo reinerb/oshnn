@@ -28,44 +28,49 @@ export default async function handler(
         token,
       );
 
-      if (!recaptchaVerified) {
-        return res.status(400).json({ error: "reCAPTCHA verification failed" });
-      }
+      console.log(recaptchaVerified);
 
-      // Define the Web3Forms submission URL
-      const web3FormsUrl = "https://api.web3forms.com/submit";
+      if (!recaptchaVerified) {
+        return res
+          .status(400)
+          .json({ success: false, message: "reCaptcha failed" });
+      }
 
       // Create a FormData object and append the fields dynamically
-      const form = new FormData();
-      form.append("subject", "New message from OSHNN contact form");
-      form.append("access_key", WEB3FORMS_KEY);
+      const submission = {
+        ...formData,
+        subject: "New message from OSHNN contact form",
+        access_key: WEB3FORMS_KEY,
+      };
 
-      // Loop through the formData and append each field
-      for (const [field, value] of Object.entries(formData)) {
-        form.append(field, value);
-      }
+      console.log(submission);
 
       // Make the API request to Web3Forms
-      const response = await fetch(web3FormsUrl, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: form,
+        body: JSON.stringify(submission),
       });
 
       if (!response.ok) {
         const errorMessage = `HTTP error! Status: ${response.status}`;
         console.error(errorMessage); // Log the error for debugging
-        return res.status(500).json({ error: "Internal Server Error" });
+        console.log(await response.json());
+        return res.status(500).json({ success: false, message: errorMessage });
       }
 
       const responseData = await response.json();
       res.status(200).json(responseData);
     } catch (error) {
       console.error("An error occurred:", error); // Log the error for debugging
-      res.status(500).json({ error: "Internal Server Error" });
+      if (typeof error === "string") {
+        res.status(500).json({ success: false, message: error });
+      } else if (error instanceof Error) {
+        res.status(500).json({ success: false, message: error.message });
+      }
     }
   } else {
     res.status(405).json({ error: "Method Not Allowed" });
