@@ -22,7 +22,7 @@ const SearchBar = ({
   };
 
   return (
-    <section className={twMerge("flex flex-col gap-2 sm:flex-row", className)}>
+    <form className={twMerge("flex flex-col gap-2 sm:flex-row", className)}>
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -36,7 +36,7 @@ const SearchBar = ({
       <Button primary onClick={() => action(query)}>
         Search
       </Button>
-    </section>
+    </form>
   );
 };
 
