@@ -26,6 +26,10 @@ function SearchResults({ searchString, page, className }: SearchResultsProps) {
   const articleBlocks = posts.map((post) => <ArticleBlock {...post} />);
 
   useEffect(() => {
+    setLoading(false);
+  }, [posts]);
+
+  useEffect(() => {
     if (!searchString) {
       setLoading(false);
       return;
@@ -45,10 +49,6 @@ function SearchResults({ searchString, page, className }: SearchResultsProps) {
 
     fetchData().catch(console.error);
   }, [searchString, page]);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [posts]);
 
   return (
     <ArticleGrid title="Search Results" headlineStart>
