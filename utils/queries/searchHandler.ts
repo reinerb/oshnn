@@ -1,4 +1,3 @@
-import { wpQueryHandler } from "./wpQueryHandler";
 import type { BlockArticle } from "../types/BlogPages";
 import { WordPressResponse } from "../types/wordpressQueries";
 import { decode } from "html-entities";
