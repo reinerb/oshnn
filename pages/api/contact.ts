@@ -48,6 +48,10 @@ export default async function handler(
       // Make the API request to Web3Forms
       const response = await fetch(web3FormsUrl, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: form,
       });
 
