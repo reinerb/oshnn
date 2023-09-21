@@ -1,13 +1,26 @@
-import Search from "@/utils/components/Search/Search";
-import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import React from "react";
+import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
+import Search from "@/utils/components/Search/Search";
+import type { NextPageContext } from "next";
 
-function SearchPage() {
+type SearchPageProps = {
+  search: string;
+  page: number;
+};
+
+function SearchPage(props: SearchPageProps) {
   return (
     <PrimaryLayout title="Search | OSHNN">
-      <Search />
+      <Search {...props} />
     </PrimaryLayout>
   );
 }
+
+SearchPage.getInitialProps = async ({ query }: NextPageContext) => {
+  return {
+    search: query.search || "",
+    page: Number(query.page) || 1,
+  };
+};
 
 export default SearchPage;

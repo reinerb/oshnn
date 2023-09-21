@@ -5,8 +5,8 @@ import Button from "../Button";
 import { twMerge } from "tailwind-merge";
 
 type SearchBarProps = {
-  initialQuery?: string;
   action: (query: string) => void;
+  initialQuery?: string;
   className?: string;
 };
 
@@ -22,7 +22,13 @@ const SearchBar = ({
   };
 
   return (
-    <form className={twMerge("flex flex-col gap-2 sm:flex-row", className)}>
+    <form
+      className={twMerge("flex flex-col gap-2 sm:flex-row", className)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        action(query);
+      }}
+    >
       <label htmlFor="search" className="sr-only">
         Search
       </label>
