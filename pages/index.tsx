@@ -7,6 +7,7 @@ import SearchBar from "@/utils/components/Search/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
+import { useRouter } from "next/navigation";
 
 type HomepageProps = {
   trending: BlockArticle[];
@@ -46,6 +47,8 @@ export default function Home({
   rhodeIsland,
   topics,
 }: HomepageProps) {
+  const router = useRouter();
+
   return (
     <PrimaryLayout
       title="OSHNN | Ocean State Health News Network"
@@ -105,7 +108,11 @@ export default function Home({
         </LinkButton>
       </section>
 
-      <SearchBar action={(query) => console.log(query)} />
+      <SearchBar
+        action={(query) =>
+          router.push(`/search?search=${encodeURIComponent(query)}`)
+        }
+      />
     </PrimaryLayout>
   );
 }
