@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 import { twMerge } from "tailwind-merge";
 
 type SearchBarProps = {

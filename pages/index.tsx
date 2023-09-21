@@ -3,7 +3,7 @@ import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
 import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
 import LinkButton from "@/utils/components/LinkButton";
-import SearchBar from "@/utils/components/SearchBar";
+import SearchBar from "@/utils/components/Search/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
