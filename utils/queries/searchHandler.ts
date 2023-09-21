@@ -1,6 +1,7 @@
 import { wpQueryHandler } from "./wpQueryHandler";
 import type { BlockArticle } from "../types/BlogPages";
 import { WordPressResponse } from "../types/wordpressQueries";
+import { decode } from "html-entities";
 
 type SearchHandlerParams = {
   searchString: string;
@@ -20,10 +21,9 @@ export async function searchHandler({
   page,
   perPage,
 }: SearchHandlerParams): Promise<SearchResults> {
-  const url = `${WP_URL}/wp-json/wp/v2/posts?fields=id,title,slug,acf
-    &search=${encodeURIComponent(searchString)}
-    &page=${page || 1}
-    &per_page=${perPage || 10}`;
+  const url = `${WP_URL}/wp-json/wp/v2/posts?fields=id,title,slug,acf&search=${encodeURIComponent(
+    searchString,
+  )}&page=${page || 1}&per_page=${perPage || 10}`;
 
   const response = await fetch(url);
 
@@ -38,6 +38,7 @@ export async function searchHandler({
       publicationDate: acf!.publicationDate,
       publicationTitle: acf!.publicationTitle,
       paywall: acf!.paywall,
+      title: decode(title!.rendered),
     } as BlockArticle;
   });
 

@@ -13,7 +13,10 @@ function Search({ search, page }: SearchProps) {
   return (
     <div className="flex flex-col gap-4">
       <SearchBar initialQuery={search || ""} />
-      <SearchResults query={search || ""} startPage={Number(page) || 1} />
+      <SearchResults
+        searchString={search || ""}
+        startPage={Number(page) || 1}
+      />
     </div>
   );
 }
