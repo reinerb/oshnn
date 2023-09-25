@@ -22,22 +22,6 @@ export default function Document() {
           sizes="16x16"
           href="/favicon/favicon-16x16.png"
         />
-
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-PZ8B6SSL2T"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-PZ8B6SSL2T');
-            `,
-          }}
-        />
       </Head>
       <body>
         <Main />
