@@ -7,6 +7,7 @@ import SearchBar from "@/utils/components/Search/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
+import { WordPressResponse } from "@/utils/types/wordpressQueries";
 
 type HomepageProps = {
   trending: BlockArticle[];
@@ -20,7 +21,28 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
   const topics = await getTopics();
 
   // Get trending posts x6
-  const trending = await getPosts({ page: 1, perPage: 6 });
+  const trendingIds = (await fetch(
+    "https://oshnn.btreiner.com/wp-json/oshnn/v1/posts",
+  ).then((res) => res.json())) as number[];
+
+  let trending: BlockArticle[] = [];
+  for (const id of trendingIds) {
+    let postData = (await fetch(
+      `https://oshnn.btreiner.com/wp-json/wp/v2/posts/${id}?_fields=id,slug,title,acf,categories`,
+    ).then((res) => res.json())) as WordPressResponse;
+
+    let post: BlockArticle = {
+      id: postData.id,
+      title: postData.title.rendered,
+      slug: postData.slug,
+      publicationDate: postData.acf!.publicationDate,
+      publicationTitle: postData.acf!.publicationTitle,
+      paywall: postData.acf!.paywall,
+      categories: postData.categories!,
+    };
+
+    trending.push(post);
+  }
 
   // Get national and Rhode Island posts x5 each
   const national = await getPosts({
@@ -58,12 +80,16 @@ export default function Home({
         <h1 className="text-center text-2xl 2xl:text-3xl">
           Ocean State Health News Network
         </h1>
-        <p className="max-w-6xl text-center">
+        <p className="max-w-screen-xl text-center">
           The volume of healthcare news and information can be overwhelming.
           OSHNN navigates this information superhighway for you. OSHNN
           highlights articles of interest to provide you with insight and
           knowledge. OSHNN chronicles healthcare news from around the country
-          and specific to the Ocean State. OSHNN is the pulse of healthcare.
+          and specific to the Ocean State.
+        </p>
+        <p>
+          OSHNN's ultimate aim is to educate and share knowledge so that our
+          users can take action!
         </p>
       </section>
 
