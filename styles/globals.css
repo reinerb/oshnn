@@ -80,7 +80,15 @@
     @apply mb-1 text-xl;
   }
 
-  .cms-page p + h2 {
+  .cms-page * + * {
     @apply mt-2 lg:mt-4;
+  }
+
+  .cms-page ul {
+    @apply list-inside list-disc;
+  }
+
+  .cms-page li + li {
+    @apply mt-1;
   }
 }
