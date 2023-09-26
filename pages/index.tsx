@@ -124,9 +124,12 @@ export default function Home({
           Sign up today and stay informed. Receive the latest curated healthcare
           news in your inbox on a biweekly basis.
         </p>
-        <LinkButton href="/newsletter" inverted primary>
+        <a
+          href="/newsletter"
+          className="bg-primary-300 px-4 py-2 text-primary-950 hover:bg-primary-200 hover:text-primary-950 active:bg-primary-100 active:text-primary-950 dark:bg-primary-700 dark:text-primary-50 dark:hover:bg-primary-800 dark:hover:text-primary-50 dark:active:bg-primary-900 dark:active:text-primary-50"
+        >
           Subscribe
-        </LinkButton>
+        </a>
       </section>
 
       <SearchBar />

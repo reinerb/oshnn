@@ -4,8 +4,6 @@ import { useTheme } from "next-themes";
 import React, { useEffect } from "react";
 
 function NewsletterForm() {
-  const { resolvedTheme } = useTheme();
-
   useEffect(() => {
     // Create the first script tag
     const script1 = document.createElement("script");
@@ -28,7 +26,7 @@ function NewsletterForm() {
       document.body.removeChild(script1);
       document.body.removeChild(script2);
     };
-  }, [resolvedTheme]);
+  }, []);
 
   return (
     <>
