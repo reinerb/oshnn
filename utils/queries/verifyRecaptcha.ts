@@ -15,6 +15,8 @@ export async function verifyRecaptcha(
 
     const data = await response.json();
 
+    console.log(data);
+
     return data.success && data.score > 0.5;
   } catch (error) {
     console.error(error);

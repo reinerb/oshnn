@@ -43,8 +43,6 @@ export default async function handler(
         access_key: WEB3FORMS_KEY,
       };
 
-      console.log(submission);
-
       // Make the API request to Web3Forms
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",

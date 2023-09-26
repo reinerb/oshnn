@@ -1,6 +1,9 @@
 import NewsletterForm from "@/utils/components/NewsletterForm";
 import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 import React from "react";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 function NewsletterSignupPage() {
   return (
@@ -8,16 +11,7 @@ function NewsletterSignupPage() {
       title="Newsletter Signup | OSHNN"
       className="flex flex-col gap-4"
     >
-      <h1 className="text-2xl">Sign up for our newsletter!</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, commodi
-        cum quaerat doloribus laboriosam labore magnam praesentium, tempora,
-        iusto similique id. Ad, magni assumenda maiores in commodi optio odio
-        iste?
-      </p>
-
       <NewsletterForm />
-      <p className="self-end italic">* denotes a required field.</p>
     </PrimaryLayout>
   );
 }

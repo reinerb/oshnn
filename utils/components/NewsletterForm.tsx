@@ -1,251 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import Button from "./Button";
-import { useReCaptcha } from "next-recaptcha-v3";
+import { useTheme } from "next-themes";
+import React, { useEffect } from "react";
 
-type NewsletterFormProps = {
-  className?: string;
-};
+function NewsletterForm() {
+  const { resolvedTheme } = useTheme();
 
-type NewsletterFormData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-  jobTitle?: string;
-  company?: string;
-};
+  useEffect(() => {
+    // Create the first script tag
+    const script1 = document.createElement("script");
+    script1.text = `var _ctct_m = "76e2031ff5abd0e0e4365a88681f4383";`;
 
-type SubmissionError = {
-  tripped: boolean;
-  message: string;
-};
+    // Create the second script tag
+    const script2 = document.createElement("script");
+    script2.id = "signupScript";
+    script2.src =
+      "//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js";
+    script2.async = true;
+    script2.defer = true;
 
-const schema = Yup.object({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email address").required("Required"),
-  phone: Yup.lazy((value) =>
-    value === ""
-      ? Yup.string()
-      : Yup.string().matches(
-          /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
-          {
-            message: "Invalid phone number",
-          },
-        ),
-  ),
-});
+    // Append the scripts to the document
+    document.body.appendChild(script1);
+    document.body.appendChild(script2);
 
-function NewsletterForm({ className }: NewsletterFormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitSuccessful, isSubmitting },
-  } = useForm<NewsletterFormData>({
-    mode: "onTouched",
-    resolver: yupResolver(schema),
-  });
-  const { executeRecaptcha } = useReCaptcha();
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const [submissionError, setSubmissionError] = useState<SubmissionError>({
-    tripped: false,
-    message: "",
-  });
-
-  const onSubmit: SubmitHandler<NewsletterFormData> = async (formData) => {
-    if (!executeRecaptcha) {
-      setSubmissionError({
-        tripped: true,
-        message: "executeRecaptcha not initialized",
-      });
-      return;
-    }
-
-    const token = await executeRecaptcha("onSubmit");
-
-    const formSubmission = { formData, token };
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(formSubmission),
-      }).then((res) => res.json());
-
-      response.success
-        ? setSubmitted(true)
-        : setSubmissionError({
-            tripped: true,
-            message: response.message,
-          });
-    } catch (e) {
-      if (typeof e === "string") {
-        setSubmissionError({ tripped: true, message: e });
-      } else if (e instanceof Error) {
-        setSubmissionError({ tripped: true, message: e.message });
-      }
-    }
-  };
+    // Clean up the scripts when the component unmounts
+    return () => {
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
+    };
+  }, [resolvedTheme]);
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={twMerge("grid grid-cols-1 gap-4 md:grid-cols-2", className)}
-    >
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="firstName">First Name*</label>
-        {errors.firstName && (
-          <label
-            htmlFor="firstName"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.firstName.message}
-          </label>
-        )}
-        <input
-          id="firstName"
-          type="text"
-          placeholder="Nomen"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.firstName && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("firstName")}
-        />
-      </div>
-
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="lastName">Last Name*</label>
-        {errors.lastName && (
-          <label
-            htmlFor="lastName"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.lastName.message}
-          </label>
-        )}
-        <input
-          id="lastName"
-          type="lastName"
-          placeholder="Nescio"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.lastName && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("lastName")}
-        />
-      </div>
-
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="email">Email*</label>
-        {errors.email && (
-          <label
-            htmlFor="email"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.email.message}
-          </label>
-        )}
-        <input
-          id="email"
-          type="email"
-          placeholder="nescio@gmail.com"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.email && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("email")}
-        />
-      </div>
-
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="phone">Phone</label>
-        {errors.phone && (
-          <label
-            htmlFor="phone"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.phone.message}
-          </label>
-        )}
-        <input
-          id="phone"
-          type="tel"
-          placeholder="401-555-1234"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.phone && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("phone")}
-        />
-      </div>
-
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="jobTitle">Job Title</label>
-        {errors.jobTitle && (
-          <label
-            htmlFor="jobTitle"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.jobTitle.message}
-          </label>
-        )}
-        <input
-          id="jobTitle"
-          type="jobTitle"
-          placeholder="Executive Director"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.jobTitle && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("jobTitle")}
-        />
-      </div>
-
-      <div className="grid w-full grid-cols-2">
-        <label htmlFor="company">Company</label>
-        {errors.company && (
-          <label
-            htmlFor="company"
-            className="place-self-end font-bold text-red-700 dark:text-red-300"
-          >
-            {errors.company.message}
-          </label>
-        )}
-        <input
-          id="company"
-          type="company"
-          placeholder="Rhode Island Hospital"
-          className={twMerge(
-            "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-            errors.company && "bg-red-200 dark:bg-red-800",
-          )}
-          {...register("company")}
-        />
-      </div>
-
-      <div className="grid w-full md:col-span-2">
-        <Button
-          disabled={isSubmitting}
-          primary
-          type="submit"
-          className="w-full md:w-24 md:place-self-end"
-        >
-          {isSubmitting ? (
-            <div className="mx-auto h-6 w-6 animate-spin rounded-full border-4 border-primary-200 !border-t-transparent dark:border-primary-800">
-              <span className="sr-only">Loading...</span>
-            </div>
-          ) : (
-            "Submit"
-          )}
-        </Button>
-      </div>
-    </form>
+    <>
+      <div
+        className="ctct-inline-form mx-auto max-w-screen-lg"
+        data-form-id="b26a8d83-a640-4086-a5ee-05701dc09360"
+      />
+    </>
   );
 }
 

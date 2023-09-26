@@ -56,8 +56,6 @@ function ContactForm({ className }: ContactFormProps) {
 
     const formSubmission = { formData, token };
 
-    console.log(formSubmission);
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
