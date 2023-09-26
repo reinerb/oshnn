@@ -14,6 +14,7 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import type { PostData } from "@/utils/types/wordpressQueries";
 import type { Category } from "@/utils/types/blog";
 import type { BlockArticle } from "@/utils/types/BlogPages";
+import ViewIncrementer from "@/utils/components/ViewIncrementer";
 
 const ShareButtons = dynamic(
   () => import("@/utils/components/ShareButtons/ShareButtons"),
@@ -23,6 +24,7 @@ const ShareButtons = dynamic(
 );
 
 type ArticleProps = {
+  id: number;
   title: string;
   content: string;
   publicationDate: string;
@@ -75,6 +77,7 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async (context) => {
 
   return {
     props: {
+      id: postData.id,
       title: postData.title,
       content: postData.content,
       ...postData.acf,
@@ -102,6 +105,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 function ArticlePage({
+  id,
   title,
   content,
   publicationDate,
@@ -172,6 +176,8 @@ function ArticlePage({
           ))}
         </ArticleGrid>
       </section>
+
+      <ViewIncrementer id={id} />
     </PrimaryLayout>
   );
 }
