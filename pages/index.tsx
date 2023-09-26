@@ -71,9 +71,7 @@ export default function Home({
   return (
     <PrimaryLayout
       title="OSHNN | Ocean State Health News Network"
-      meta="OSHNN navigates the intricate landscape of medical advancements and
-            wellness insights to bring you the latest developments in healthcare
-            news from around Rhode Island and the rest of the country."
+      meta="OSHNN: Your Healthcare News Companion | Stay Informed, Take Action"
       className="flex flex-col gap-8"
     >
       <section className="flex flex-col items-center gap-2 text-primary-900 dark:text-primary-300">
