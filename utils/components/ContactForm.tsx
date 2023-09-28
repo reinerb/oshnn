@@ -103,7 +103,7 @@ function ContactForm({ className }: ContactFormProps) {
               {errors.name && (
                 <label
                   htmlFor="name"
-                  className="place-self-end font-bold text-red-700 dark:text-red-300"
+                  className="place-self-end font-bold text-red-800 dark:text-red-300"
                 >
                   {errors.name!.message}
                 </label>
@@ -114,7 +114,8 @@ function ContactForm({ className }: ContactFormProps) {
                 placeholder="Nomen Nescio"
                 className={twMerge(
                   "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-                  errors.name && "bg-red-200 dark:bg-red-800",
+                  errors.name &&
+                    "bg-red-800 text-neutral-50 placeholder:text-neutral-50",
                 )}
                 {...register("name")}
               />
