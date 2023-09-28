@@ -157,7 +157,11 @@ function ArticlePage({
         >
           Read more at {publicationTitle}{" "}
           {paywall && (
-            <FontAwesomeIcon icon={faCircleDollarToSlot} className="ml-2" />
+            <FontAwesomeIcon
+              icon={faCircleDollarToSlot}
+              className="ml-2"
+              aria-label="This article may require a subscription to view."
+            />
           )}
         </LinkButton>
 

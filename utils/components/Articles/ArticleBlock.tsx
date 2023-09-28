@@ -24,9 +24,9 @@ function ArticleBlock({
   return (
     <Link
       href={`/article/${slug}`}
-      className="border-primary-700 hover:border-primary-800 dark:border-primary-300 dark:hover:border-primary-200 group flex h-full flex-col rounded-md border-2 p-2 transition-colors duration-200"
+      className="group flex h-full flex-col rounded-md border-2 border-primary-700 p-2 transition-colors duration-200 hover:border-primary-800 dark:border-primary-300 dark:hover:border-primary-200"
     >
-      <h3 className="text-primary-700 group-hover:text-primary-800 dark:text-primary-300 dark:group-hover:text-primary-200 mb-1 block text-lg font-medium transition-colors duration-200">
+      <h3 className="mb-1 block text-lg font-medium text-primary-700 transition-colors duration-200 group-hover:text-primary-800 dark:text-primary-300 dark:group-hover:text-primary-200">
         {title}
       </h3>
       <div className="mt-auto flex gap-1 divide-x divide-neutral-700 leading-tight text-neutral-700 dark:divide-neutral-300 dark:text-neutral-300">
@@ -34,7 +34,10 @@ function ArticleBlock({
         <span className="pl-1">{renderedDate}</span>
         {paywall && (
           <span className="pl-1">
-            <FontAwesomeIcon icon={faCircleDollarToSlot} />
+            <FontAwesomeIcon
+              icon={faCircleDollarToSlot}
+              aria-label="This article may require a subscription to view."
+            />
           </span>
         )}
       </div>
