@@ -6,6 +6,7 @@ import ColorModeSwitcher from "../ColorModeSwitcher";
 import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 
 type NavLink = {
   name: string;
@@ -82,12 +83,36 @@ function PrimaryNav() {
             <FontAwesomeIcon icon={faX} className="text-lg" />
           </button>
         </div>
-        <ul className="flex flex-col items-center gap-2">
+        <ul className="flex flex-grow flex-col items-center gap-2">
           {links.map(({ name, href }) => (
             <li key={href}>
               <a href={href}>{name}</a>
             </li>
           ))}
+        </ul>
+        <ul className="flex flex-col items-center gap-2">
+          <li>
+            <a href="/privacy">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/disclaimer">Disclaimer</a>
+          </li>
+          <li className="flex justify-center gap-4">
+            <a
+              className="block"
+              href="https://facebook.com/"
+              aria-label="Find us on Facebook"
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a
+              className="block"
+              href="https://linkedin.com/"
+              aria-label="Find us on LinkedIn"
+            >
+              <FontAwesomeIcon icon={faLinkedinIn} />
+            </a>
+          </li>
         </ul>
       </div>
     </>

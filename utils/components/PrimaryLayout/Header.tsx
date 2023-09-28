@@ -5,10 +5,6 @@ import Logo from "../Logo";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-const ColorModeSwitcher = dynamic(() => import("../ColorModeSwitcher"), {
-  ssr: false,
-});
-
 const PrimaryNav = dynamic(() => import("./PrimaryNav"), { ssr: false });
 
 function Header() {

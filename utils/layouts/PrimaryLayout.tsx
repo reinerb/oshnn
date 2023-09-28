@@ -1,8 +1,11 @@
 import React from "react";
 import Header from "../components/PrimaryLayout/Header";
-import Footer from "../components/PrimaryLayout/Footer";
-import FooterDivider from "../components/PrimaryLayout/FooterDivider";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+
+const Footer = dynamic(() => import("../components/PrimaryLayout/Footer"), {
+  ssr: false,
+});
 
 type PrimaryLayoutProps = {
   title: string;
