@@ -2,11 +2,15 @@
 
 import React, { useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
-import ColorModeSwitcher from "../ColorModeSwitcher";
 import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import dynamic from "next/dynamic";
+
+const ColorModeSwitcher = dynamic(() => import("../ColorModeSwitcher"), {
+  ssr: false,
+});
 
 type NavLink = {
   name: string;
