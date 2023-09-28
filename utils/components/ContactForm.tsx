@@ -113,9 +113,9 @@ function ContactForm({ className }: ContactFormProps) {
                 type="text"
                 placeholder="Nomen Nescio"
                 className={twMerge(
-                  "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
+                  "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:text-sm placeholder:font-light placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
                   errors.name &&
-                    "bg-red-800 text-neutral-50 placeholder:text-neutral-50",
+                    "bg-red-800 text-neutral-50 placeholder:text-neutral-100 dark:bg-red-800",
                 )}
                 {...register("name")}
               />
@@ -135,8 +135,9 @@ function ContactForm({ className }: ContactFormProps) {
                 type="email"
                 placeholder="nescio@gmail.com"
                 className={twMerge(
-                  "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-                  errors.email && "bg-red-200 dark:bg-red-800",
+                  "col-span-2 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:text-sm placeholder:font-light placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
+                  errors.email &&
+                    "bg-red-800 text-neutral-50 placeholder:text-neutral-100 dark:bg-red-800",
                 )}
                 {...register("email")}
               />
@@ -155,8 +156,9 @@ function ContactForm({ className }: ContactFormProps) {
                 id="message"
                 placeholder="Hi! I'd like to write to you about..."
                 className={twMerge(
-                  "col-span-2 h-36 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
-                  errors.message && "bg-red-200 dark:bg-red-800",
+                  "col-span-2 h-36 w-full rounded-md bg-neutral-100 px-4 py-2 text-neutral-950 outline-none placeholder:text-sm placeholder:font-light placeholder:italic placeholder:text-neutral-800 focus-within:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-200 dark:focus-within:bg-neutral-700",
+                  errors.message &&
+                    "bg-red-800 text-neutral-50 placeholder:text-neutral-100 dark:bg-red-800",
                 )}
                 {...register("message")}
               />
