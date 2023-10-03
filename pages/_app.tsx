@@ -8,15 +8,17 @@ import { Analytics } from "@vercel/analytics/react";
 
 const jost = Jost({ subsets: ["latin"] });
 
+const environment = process.env.NEXT_PUBLIC_ENVIRONMENT || "";
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
       <Head>
         <meta charSet="utf-8" />
       </Head>
-      <GoogleAnalytics trackPageViews />
+      {environment === "production" && <GoogleAnalytics trackPageViews />}
       <Component {...pageProps} />
-      <Analytics />
+      {environment === "production" && <Analytics />}
 
       <style jsx global>
         {`
