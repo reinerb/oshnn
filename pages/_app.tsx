@@ -20,6 +20,13 @@ export default function App({ Component, pageProps }: AppProps) {
           content="https://www.oshnn.com/images/og-logo.png"
           key="ogimage"
         />
+        <meta
+          property="og:image:secure_url"
+          content="https://www.oshnn.com/images/og-logo.png"
+          key="ogimagesecure"
+        />
+        <meta property="og:image:width" content="1200" key="ogimagewidth" />
+        <meta property="og:image:height" content="630" key="ogimageheight" />
         <meta property="og:locale" content="en_US" key="oglocale" />
       </Head>
       {environment === "production" && <GoogleAnalytics trackPageViews />}
