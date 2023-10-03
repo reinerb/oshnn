@@ -7,7 +7,7 @@ import type {
   CategoryResponse,
 } from "@/utils/types/wordpressQueries";
 
-const WP_URL = "https://oshnn.btreiner.com";
+const WP_URL = "https://api.oshnn.com";
 
 // Queries the WordPress CMS for the given type of posts
 // Accepts a params object:

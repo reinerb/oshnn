@@ -22,13 +22,13 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
 
   // Get trending posts x6
   const trendingIds = (await fetch(
-    "https://oshnn.btreiner.com/wp-json/oshnn/v1/posts",
+    "https://api.oshnn.com/wp-json/oshnn/v1/posts",
   ).then((res) => res.json())) as number[];
 
   let trending: BlockArticle[] = [];
   for (const id of trendingIds) {
     let postData = (await fetch(
-      `https://oshnn.btreiner.com/wp-json/wp/v2/posts/${id}?_fields=id,slug,title,acf,categories`,
+      `https://api.oshnn.com/wp-json/wp/v2/posts/${id}?_fields=id,slug,title,acf,categories`,
     ).then((res) => res.json())) as WordPressResponse;
 
     let post: BlockArticle = {

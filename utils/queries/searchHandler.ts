@@ -13,7 +13,7 @@ type SearchResults = {
   totalPages: number;
 };
 
-const WP_URL = "https://oshnn.btreiner.com";
+const WP_URL = "https://api.oshnn.com";
 
 export async function searchHandler({
   searchString,
