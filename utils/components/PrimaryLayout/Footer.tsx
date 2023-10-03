@@ -5,7 +5,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { faFacebookF, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import LinkedIn from "../SocialIcons/LinkedIn";
+import Facebook from "../SocialIcons/Facebook";
 
 function Footer() {
   const { width } = useWindowSize();
@@ -17,14 +18,10 @@ function Footer() {
           Copyright <FontAwesomeIcon icon={faCopyright} /> 2023 OSHNN
         </li>
         <li className="text-lg md:pl-2 xl:pl-4">
-          <Link href="https://facebook.com/" aria-label="Find us on Facebook">
-            <FontAwesomeIcon icon={faFacebookF} />
-          </Link>
+          <Facebook />
         </li>
         <li className="text-lg md:pl-2 xl:pl-4">
-          <Link href="https://linkedin.com/" aria-label="Find us on LinkedIn">
-            <FontAwesomeIcon icon={faLinkedinIn} />
-          </Link>
+          <LinkedIn />
         </li>
         <li className="md:pl-2 xl:pl-4">
           <Link href="/privacy">Privacy Policy</Link>

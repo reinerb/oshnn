@@ -5,8 +5,9 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import dynamic from "next/dynamic";
+import LinkedIn from "../SocialIcons/LinkedIn";
+import Facebook from "../SocialIcons/Facebook";
 
 const ColorModeSwitcher = dynamic(() => import("../ColorModeSwitcher"), {
   ssr: false,
@@ -102,20 +103,8 @@ function PrimaryNav() {
             <a href="/disclaimer">Disclaimer</a>
           </li>
           <li className="flex justify-center gap-4">
-            <a
-              className="block"
-              href="https://facebook.com/"
-              aria-label="Find us on Facebook"
-            >
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a
-              className="block"
-              href="https://linkedin.com/"
-              aria-label="Find us on LinkedIn"
-            >
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
+            <Facebook />
+            <LinkedIn />
           </li>
         </ul>
       </div>
