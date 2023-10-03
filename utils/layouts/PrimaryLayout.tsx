@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/PrimaryLayout/Header";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const Footer = dynamic(() => import("../components/PrimaryLayout/Footer"), {
   ssr: false,
@@ -20,11 +21,19 @@ function PrimaryLayout({
   children,
   className,
 }: PrimaryLayoutProps) {
+  const router = useRouter();
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={meta} />
+        <meta name="description" content={meta} key="description" />
+        <meta property="og:title" content={title} key="ogtitle" />
+        <meta property="og:description" content={meta} key="ogdescription" />
+        <meta
+          property="og:url"
+          content={`https://www.oshnn.com${router.pathname}`}
+          key="ogurl"
+        />
       </Head>
       <div className={`grid min-h-screen grid-rows-body`}>
         <Header />

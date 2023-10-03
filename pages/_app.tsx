@@ -14,7 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
       <Head>
-        <meta charSet="utf-8" />
+        <meta charSet="utf-8" key="charset" />
+        <meta
+          property="og:image"
+          content="https://www.oshnn.com/images/og-logo.png"
+          key="ogimage"
+        />
+        <meta property="og:locale" content="en_US" key="oglocale" />
       </Head>
       {environment === "production" && <GoogleAnalytics trackPageViews />}
       <Component {...pageProps} />

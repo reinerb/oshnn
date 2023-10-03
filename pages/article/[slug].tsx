@@ -15,6 +15,7 @@ import type { PostData } from "@/utils/types/wordpressQueries";
 import type { Category } from "@/utils/types/blog";
 import type { BlockArticle } from "@/utils/types/BlogPages";
 import ViewIncrementer from "@/utils/components/ViewIncrementer";
+import Head from "next/head";
 
 const ShareButtons = dynamic(
   () => import("@/utils/components/ShareButtons/ShareButtons"),
@@ -128,61 +129,66 @@ function ArticlePage({
   const truncatedTitle = title.substring(0, 30);
 
   return (
-    <PrimaryLayout
-      title={`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
-      meta={content}
-      className="flex flex-col gap-4"
-    >
-      <article className="flex flex-col gap-4">
-        {/* Blog content */}
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl">{title}</h1>
-          <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
-            <span>{publicationTitle}</span>
-            <span className="sm:pl-4">{articleAuthors}</span>
-            <span className="sm:pl-4">{renderedDate}</span>
+    <>
+      <Head>
+        <meta property="og:type" content="article" key="ogtype" />
+      </Head>
+      <PrimaryLayout
+        title={`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
+        meta={content}
+        className="flex flex-col gap-4"
+      >
+        <article className="flex flex-col gap-4">
+          {/* Blog content */}
+          <div className="flex flex-col gap-1">
+            <h1 className="text-2xl">{title}</h1>
+            <div className="flex flex-col gap-1 italic sm:flex-row sm:gap-4 sm:divide-x sm:not-italic">
+              <span>{publicationTitle}</span>
+              <span className="sm:pl-4">{articleAuthors}</span>
+              <span className="sm:pl-4">{renderedDate}</span>
+            </div>
           </div>
-        </div>
-        <section
-          dangerouslySetInnerHTML={{ __html: content }}
-          className="flex gap-2"
-        />
+          <section
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="flex gap-2"
+          />
 
-        {/* Link to full article */}
-        <LinkButton
-          target="_blank"
-          rel="noreferrer noopener"
-          href={articleUrl}
-          className="block self-center"
-        >
-          Read more at {publicationTitle}{" "}
-          {paywall && (
-            <FontAwesomeIcon
-              icon={faCircleDollarToSlot}
-              className="ml-2"
-              aria-label="This article may require a subscription to view."
-            />
-          )}
-        </LinkButton>
+          {/* Link to full article */}
+          <LinkButton
+            target="_blank"
+            rel="noreferrer noopener"
+            href={articleUrl}
+            className="block self-center"
+          >
+            Read more at {publicationTitle}{" "}
+            {paywall && (
+              <FontAwesomeIcon
+                icon={faCircleDollarToSlot}
+                className="ml-2"
+                aria-label="This article may require a subscription to view."
+              />
+            )}
+          </LinkButton>
 
-        {/* Topics list */}
-        <div>Topics: {categoryLinks}</div>
-      </article>
+          {/* Topics list */}
+          <div>Topics: {categoryLinks}</div>
+        </article>
 
-      {/* Social media share */}
-      <ShareButtons callToAction="Share This Article" quote={title} />
+        {/* Social media share */}
+        <ShareButtons callToAction="Share This Article" quote={title} />
 
-      {/* Related articles */}
-      <section>
-        <ArticleGrid title="Related headlines" headlineStart>
-          {relatedPosts.map(({ id, ...post }) => (
-            <ArticleBlock {...post} key={id} />
-          ))}
-        </ArticleGrid>
-      </section>
+        {/* Related articles */}
+        <section>
+          <ArticleGrid title="Related headlines" headlineStart>
+            {relatedPosts.map(({ id, ...post }) => (
+              <ArticleBlock {...post} key={id} />
+            ))}
+          </ArticleGrid>
+        </section>
 
-      <ViewIncrementer id={id} />
-    </PrimaryLayout>
+        <ViewIncrementer id={id} />
+      </PrimaryLayout>
+    </>
   );
 }
 
