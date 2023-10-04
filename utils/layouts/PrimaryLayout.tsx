@@ -29,11 +29,6 @@ function PrimaryLayout({
         <meta name="description" content={meta} key="description" />
         <meta property="og:title" content={title} key="ogtitle" />
         <meta property="og:description" content={meta} key="ogdescription" />
-        <meta
-          property="og:url"
-          content={`https://www.oshnn.com${router.pathname}`}
-          key="ogurl"
-        />
       </Head>
       <div className={`grid min-h-screen grid-rows-body`}>
         <Header />
