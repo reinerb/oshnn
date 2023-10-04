@@ -135,7 +135,7 @@ function ArticlePage({
       </Head>
       <PrimaryLayout
         title={`${truncatedTitle}${truncatedTitle !== title && "..."} | OSHNN`}
-        meta={content}
+        meta={content.replace(/(<([^>]+)>)/gi, "")}
         className="flex flex-col gap-4"
       >
         <article className="flex flex-col gap-4">
