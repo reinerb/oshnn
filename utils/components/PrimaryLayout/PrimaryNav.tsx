@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { twMerge } from "tailwind-merge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -110,6 +110,20 @@ function PrimaryNav() {
       </div>
     </>
   );
+
+  const keyHandler = (e: KeyboardEvent) => {
+    if (e.key === "Escape" && active) {
+      setActive(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", keyHandler, false);
+
+    return () => {
+      document.removeEventListener("keyup", keyHandler, false);
+    };
+  }, [keyHandler]);
 
   return width && width >= 768 ? mdNav : xsNav;
 }
