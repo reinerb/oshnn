@@ -2,12 +2,12 @@ import PrimaryLayout from "@/utils/layouts/PrimaryLayout";
 import ArticleBlock from "@/utils/components/Articles/ArticleBlock";
 import ArticleGrid from "@/utils/components/Articles/ArticleGrid";
 import { GetStaticProps } from "next";
-import LinkButton from "@/utils/components/LinkButton";
 import SearchBar from "@/utils/components/Search/SearchBar";
 import WaveDivider from "@/utils/components/WaveDivider";
 import { getPosts, getTopics } from "@/utils/queries/blogPageHandlers";
 import type { BlockArticle, Topics } from "@/utils/types/BlogPages";
 import { WordPressResponse } from "@/utils/types/wordpressQueries";
+import { decode } from "html-entities";
 
 type HomepageProps = {
   trending: BlockArticle[];
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps<HomepageProps> = async () => {
 
     let post: BlockArticle = {
       id: postData.id,
-      title: postData.title.rendered,
+      title: decode(postData.title.rendered),
       slug: postData.slug,
       publicationDate: postData.acf!.publicationDate,
       publicationTitle: postData.acf!.publicationTitle,
