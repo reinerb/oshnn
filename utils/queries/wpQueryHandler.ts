@@ -135,7 +135,5 @@ async function postPageQueryHandler(
     }
   }
 
-  console.log(queryData);
-
   return queryData;
 }
