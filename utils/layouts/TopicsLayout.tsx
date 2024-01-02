@@ -55,15 +55,27 @@ function TopicsLayout({
                 : "justify-start",
             )}
           >
-            {hasPreviousPage && (
-              <Link href={`/topics/page/${page - 1}`}>
+            {hasPreviousPage ? (
+              <Link
+                href={`/topics${topic ? `/${topic.slug}` : ""}${
+                  page === 2 ? "" : `/page/${page - 1}`
+                }`}
+              >
                 <FontAwesomeIcon icon={faAngleLeft} /> Previous
               </Link>
+            ) : (
+              ""
             )}
-            {hasNextPage && (
-              <Link href={`/topics/page/${page + 1}`}>
+            {hasNextPage ? (
+              <Link
+                href={`/topics${topic ? `/${topic.slug}` : ""}/page/${
+                  page + 1
+                }`}
+              >
                 Next <FontAwesomeIcon icon={faAngleRight} />
               </Link>
+            ) : (
+              ""
             )}
           </div>
         )}
