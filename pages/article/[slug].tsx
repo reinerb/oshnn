@@ -56,18 +56,24 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async (context) => {
   // Sort them so National and Rhode Island come first (they have the lowest ID)
   categories.sort((a, b) => a.id - b.id);
 
+  // Filter
+  const otherCategories = categories
+    .filter(
+      (category) =>
+        category.title !== "National" && category.title !== "Rhode Island",
+    )
+    .map((category) => category.id);
+
   // Find related posts: the newest posts that share a category with this one
   // Don't include general categories - National and Rhode Island
   // Ask for one more than needed - important in next step
   const relatedPostsQuery = await getPosts({
     page: 1,
     perPage: 4,
-    categoryIds: categories
-      .filter(
-        (category) =>
-          category.title !== "National" && category.title !== "Rhode Island",
-      )
-      .map((category) => category.id),
+    categoryIds:
+      otherCategories.length > 0
+        ? otherCategories
+        : categories.map((category) => category.id),
   });
 
   // Remove this post from the list, if present
