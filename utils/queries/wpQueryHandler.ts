@@ -28,16 +28,18 @@ export async function wpQueryHandler(
   }
 
   // Return the query data with the rendered title and content
-  return queryData.map((element) => {
-    let data = {
-      ...element,
-      content: element.content?.rendered,
-      excerpt: element.excerpt?.rendered,
-      title: decode(element.title.rendered),
-    };
+  return queryData
+    .filter((element) => element.id > 0)
+    .map((element) => {
+      let data = {
+        ...element,
+        content: element.content?.rendered,
+        excerpt: element.excerpt?.rendered,
+        title: decode(element.title.rendered),
+      };
 
-    return JSON.parse(JSON.stringify(data));
-  });
+      return JSON.parse(JSON.stringify(data));
+    });
 }
 
 async function categoryQueryHandler(
